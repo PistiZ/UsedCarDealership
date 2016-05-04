@@ -1,4 +1,4 @@
-package model;
+package hu.pistiz.cars.model;
 
 public enum Allapot
 {
