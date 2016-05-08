@@ -1,20 +1,14 @@
 package hu.pistiz.cars.view;
 
-import hu.pistiz.cars.MainApp;
 import hu.pistiz.cars.model.Vehicle;
+import hu.pistiz.cars.model.VehicleDAO;
+import hu.pistiz.cars.model.VehicleDAOImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
-public class VehicleOverViewController {
-
-	@FXML
-	private TableView<Vehicle> vehicleTable;
-	@FXML
-	private TableColumn<Vehicle, String> brandColumn;
-	@FXML
-	private TableColumn<Vehicle, String> modelColumn;
+public class ViewVehicleController {
 
 	@FXML
 	private Label brandLabel;
@@ -22,6 +16,8 @@ public class VehicleOverViewController {
 	private Label modelLabel;
 	@FXML
 	private Label variantLabel;
+	@FXML
+	private Label licensePlateNumberLabel;
 	@FXML
 	private Label dateLabel;
 	@FXML
@@ -35,37 +31,35 @@ public class VehicleOverViewController {
 	@FXML
 	private Label conditionLabel;
 	@FXML
-	private Label descriptionLabel;
+	private TextArea descriptionArea;
 
-	private MainApp mainApp;
+	private Stage dialogStage;
+	private Vehicle vehicle;
+	private VehicleDAO vehicleDAO = new VehicleDAOImpl();
 
-	public VehicleOverViewController() {
+	public void setDialogStage(Stage dialogStage) {
+		this.dialogStage = dialogStage;
 	}
 
 	@FXML
 	private void initialize() {
-		brandColumn.setCellValueFactory(cellData -> cellData.getValue().brandProperty());
-		modelColumn.setCellValueFactory(cellData -> cellData.getValue().modelProperty());
-
-		showVehicleDetails(null);
-
-		vehicleTable.getSelectionModel().selectedItemProperty().addListener(
-				((observable, oldValue, newValue) -> showVehicleDetails(newValue))
-		);
 	}
 
-	private void showVehicleDetails(Vehicle vehicle) {
+	public void setAndPrintVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+
 		if (vehicle != null) {
 			brandLabel.setText(vehicle.getBrand());
 			modelLabel.setText(vehicle.getModel());
 			variantLabel.setText(vehicle.getVariant());
+			licensePlateNumberLabel.setText(vehicle.getLicensePlateNumber());
 			dateLabel.setText(vehicle.getDate().toString());
-			purchasePriceLabel.setText(vehicle.getPurchasePrice().toString());
-			salePriceLabel.setText(vehicle.getSalePrice().toString());
-			kmLabel.setText(vehicle.kmProperty().toString());
+			purchasePriceLabel.setText(vehicleDAO.priceToString(vehicle.purchasePriceProperty().longValue()));
+			salePriceLabel.setText(vehicleDAO.priceToString(vehicle.salePriceProperty().longValue()));
+			kmLabel.setText(vehicleDAO.kmToString(vehicle.kmProperty().longValue()));
 			fuelLabel.setText(vehicle.getFuel().toString());
 			conditionLabel.setText(vehicle.getCondition().toString());
-			descriptionLabel.setText(vehicle.getDescription());
+			descriptionArea.setText(vehicle.getDescription());
 		}
 		else {
 			brandLabel.setText("");
@@ -77,8 +71,12 @@ public class VehicleOverViewController {
 			kmLabel.setText("");
 			fuelLabel.setText("");
 			conditionLabel.setText("");
-			descriptionLabel.setText("");
+			descriptionArea.setText("");
 		}
 	}
 
+	@FXML
+	private void handleBack() {
+		dialogStage.close();
+	}
 }

@@ -3,8 +3,6 @@ package hu.pistiz.cars.model;
 import java.time.Year;
 
 import javafx.beans.property.*;
-import org.joda.money.CurrencyUnit;
-import org.joda.money.Money;
 
 /**
  * Gépjárművet reprezentáló osztály.
@@ -15,14 +13,14 @@ public class Vehicle {
 	private StringProperty brand;
 	private StringProperty model;
 	private StringProperty variant;
+	private StringProperty licensePlateNumber;
 	private ObjectProperty<Year> date;
-	private ObjectProperty<Money> purchasePrice;
-	private ObjectProperty<Money> salePrice;
+	private LongProperty purchasePrice;
+	private LongProperty salePrice;
 	private LongProperty km;
 	private ObjectProperty<Uzemanyag> fuel;
 	private ObjectProperty<Allapot> condition;
 	private StringProperty description;
-	//private ObjectProperty<Image> image;
 
 	public Vehicle() {
 		this(null, null);
@@ -35,11 +33,12 @@ public class Vehicle {
 	public Vehicle(String brand, String model) {
 		this.brand = new SimpleStringProperty(brand);
 		this.model = new SimpleStringProperty(model);
+		this.licensePlateNumber = new SimpleStringProperty("ASD-123");
 
 		this.variant = new SimpleStringProperty("");
 		this.date = new SimpleObjectProperty<>(Year.of(2016));
-		this.purchasePrice = new SimpleObjectProperty<>(Money.of(CurrencyUnit.of("HUF"), 1000000));
-		this.salePrice = new SimpleObjectProperty<>(Money.of(CurrencyUnit.of("HUF"), 1100000));
+		this.purchasePrice = new SimpleLongProperty(1000000);
+		this.salePrice = new SimpleLongProperty(1100000);
 		this.km = new SimpleLongProperty(200000);
 		this.fuel = new SimpleObjectProperty<>(Uzemanyag.benzin);
 		this.condition = new SimpleObjectProperty<>(Allapot.megkímélt);
@@ -71,6 +70,18 @@ public class Vehicle {
 		this.model.set(model);
 	}
 
+	public String getLicensePlateNumber() {
+		return licensePlateNumber.get();
+	}
+
+	public StringProperty licensePlateNumberProperty() {
+		return licensePlateNumber;
+	}
+
+	public void setLicensePlateNumber(String licensePlateNumber) {
+		this.licensePlateNumber.set(licensePlateNumber);
+	}
+
 	public String getVariant() {
 		return variant.get();
 	}
@@ -95,27 +106,27 @@ public class Vehicle {
 		this.date.set(date);
 	}
 
-	public Money getPurchasePrice() {
+	public long getPurchasePrice() {
 		return purchasePrice.get();
 	}
 
-	public ObjectProperty<Money> purchasePriceProperty() {
+	public LongProperty purchasePriceProperty() {
 		return purchasePrice;
 	}
 
-	public void setPurchasePrice(Money purchasePrice) {
+	public void setPurchasePrice(long purchasePrice) {
 		this.purchasePrice.set(purchasePrice);
 	}
 
-	public Money getSalePrice() {
+	public long getSalePrice() {
 		return salePrice.get();
 	}
 
-	public ObjectProperty<Money> salePriceProperty() {
+	public LongProperty salePriceProperty() {
 		return salePrice;
 	}
 
-	public void setSalePrice(Money salePrice) {
+	public void setSalePrice(long salePrice) {
 		this.salePrice.set(salePrice);
 	}
 

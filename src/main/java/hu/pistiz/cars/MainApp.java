@@ -1,13 +1,17 @@
 package hu.pistiz.cars;
 
 import hu.pistiz.cars.model.Vehicle;
+import hu.pistiz.cars.view.DealershipOverviewController;
+import hu.pistiz.cars.view.ViewVehicleController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.LoadException;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,7 +39,7 @@ public class MainApp extends Application {
 
 	public void initRootPane() {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getClassLoader().getResource("fxml/RootLayout.fxml"));
+		loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
 		try {
 			rootPane = (BorderPane) loader.load();
 		} catch (IOException e) {
@@ -47,14 +51,46 @@ public class MainApp extends Application {
 		primaryStage.show();
 	}
 
-	public void showCarDataOverview() {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getClassLoader().getResource("fxml/VehicleDataOverview.fxml"));
+	public void showDealershipOverview() {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/DealershipOverview.fxml"));
 		try {
 			AnchorPane anchorPane = (AnchorPane) loader.load();
+			anchorPane.setMaxHeight(rootPane.getPrefHeight());
+			anchorPane.setMaxWidth(rootPane.getPrefWidth());
 			rootPane.setCenter(anchorPane);
+
+			DealershipOverviewController controller = loader.getController();
+			controller.setMainApp(this);
+		} catch (LoadException e) {
+			System.out.println("DealershipOverview.fxml betöltése sikertelen!");
+			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("CarDatOverview.fxml betöltése sikertelen!");
+			e.printStackTrace();
+		}
+	}
+
+	public void showViewVehicleDialog(Vehicle vehicle) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/ViewVehicle.fxml"));
+			AnchorPane anchorPane = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.initOwner(primaryStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.setTitle("Jármű adatai");
+			Scene scene = new Scene(anchorPane);
+			dialogStage.setScene(scene);
+
+			ViewVehicleController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setAndPrintVehicle(vehicle);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -64,7 +100,7 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("Használtautó-kereskedés");
 
 		initRootPane();
-		showCarDataOverview();
+		showDealershipOverview();
 	}
 
 	public static void main(String[] args) {
