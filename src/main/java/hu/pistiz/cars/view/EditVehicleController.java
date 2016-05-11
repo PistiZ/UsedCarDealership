@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.time.Year;
 import java.time.format.DateTimeParseException;
 
-public class NewVehicleController {
+public class EditVehicleController {
 
 	@FXML
 	private TextField brandField;
@@ -54,19 +54,24 @@ public class NewVehicleController {
 
 	@FXML
 	private void initialize() {
-		brandField.setText("");
-		modelField.setText("");
-		variantField.setText("");
-		licensePlateNumberField.setText("");
-		dateField.setText("");
-		purchasePriceField.setText("");
-		salePriceField.setText("");
-		kmField.setText("");
-		fuelBox.getItems().addAll(Fuel.values());
-		conditionBox.getItems().addAll(Condition.values());
-		descriptionArea.setText("");
-		// http://stackoverflow.com/questions/12744542/requestfocus-in-textfield-doesnt-work-javafx-2-1
-		Platform.runLater(() -> brandField.requestFocus());
+	}
+
+	public void setAndPrintVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+
+		if (vehicle != null) {
+			brandField.setText(vehicle.getBrand());
+			modelField.setText(vehicle.getModel());
+			variantField.setText(vehicle.getVariant());
+			licensePlateNumberField.setText(vehicle.getLicensePlateNumber());
+			dateField.setText(vehicle.getDate().toString());
+			purchasePriceField.setText(Long.toString(vehicle.getPurchasePrice()));
+			salePriceField.setText(Long.toString(vehicle.getSalePrice()));
+			kmField.setText(Long.toString(vehicle.getKm()));
+			fuelBox.setValue(vehicle.getFuel());
+			conditionBox.setValue(vehicle.getCondition());
+			descriptionArea.setText(vehicle.getDescription());
+		}
 	}
 
 	private boolean isInputValid() {
@@ -154,7 +159,6 @@ public class NewVehicleController {
 	@FXML
 	private void handleSave() {
 		if (isInputValid()) {
-			vehicle = new Vehicle();
 			vehicle.setBrand(brandField.getText());
 			vehicle.setModel(modelField.getText());
 			vehicle.setVariant(variantField.getText());

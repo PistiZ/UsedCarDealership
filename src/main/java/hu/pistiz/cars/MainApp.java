@@ -2,6 +2,7 @@ package hu.pistiz.cars;
 
 import hu.pistiz.cars.model.Vehicle;
 import hu.pistiz.cars.view.DealershipOverviewController;
+import hu.pistiz.cars.view.EditVehicleController;
 import hu.pistiz.cars.view.NewVehicleController;
 import hu.pistiz.cars.view.ViewVehicleController;
 import javafx.application.Application;
@@ -92,6 +93,30 @@ public class MainApp extends Application {
 		} catch (LoadException e) {
 			System.out.println("NewVehicle.fxml betöltése sikertelen!");
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void showEditVehicleDialog(Vehicle vehicle) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/EditVehicle.fxml"));
+			AnchorPane anchorPane = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.initOwner(primaryStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.setTitle("Jármű szerkesztése");
+			Scene scene = new Scene(anchorPane);
+			dialogStage.setScene(scene);
+
+			EditVehicleController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setAndPrintVehicle(vehicle);
+
+			dialogStage.showAndWait();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

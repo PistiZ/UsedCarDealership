@@ -52,6 +52,24 @@ public class DealershipOverviewController {
 		Vehicle vehicle = vehicleTable.getSelectionModel().getSelectedItem();
 		if (vehicle != null)
 			mainApp.showViewVehicleDialog(vehicle);
+		else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Üres kijelölés");
+			alert.setHeaderText("Nem jelöltél ki járművet");
+			alert.setContentText("Jelölj ki egy járművet a megtekintéshez!");
+
+			alert.showAndWait();
+		}
+	}
+
+	@FXML
+	private void handleEditVehicle() {
+		Vehicle vehicle = vehicleTable.getSelectionModel().getSelectedItem();
+		if (vehicle != null) {
+			mainApp.showEditVehicleDialog(vehicle);
+			initialize();
+		}
 	}
 
 	@FXML

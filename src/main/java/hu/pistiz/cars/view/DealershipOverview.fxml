@@ -47,7 +47,7 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="185.0" text="Szerkesztés...">
+                        <Button mnemonicParsing="false" onAction="#handleEditVehicle" prefWidth="185.0" text="Szerkesztés...">
                            <font>
                               <Font size="16.0" />
                            </font>
