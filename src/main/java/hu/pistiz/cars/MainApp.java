@@ -2,6 +2,7 @@ package hu.pistiz.cars;
 
 import hu.pistiz.cars.model.Vehicle;
 import hu.pistiz.cars.view.DealershipOverviewController;
+import hu.pistiz.cars.view.NewVehicleController;
 import hu.pistiz.cars.view.ViewVehicleController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -64,6 +65,32 @@ public class MainApp extends Application {
 			controller.setMainApp(this);
 		} catch (LoadException e) {
 			System.out.println("DealershipOverview.fxml betöltése sikertelen!");
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void showNewVehicleDialog() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/NewVehicle.fxml"));
+			AnchorPane anchorPane = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.initOwner(primaryStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.setTitle("Új jármű felvétele");
+			Scene scene = new Scene(anchorPane);
+			dialogStage.setScene(scene);
+
+			NewVehicleController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+
+			dialogStage.showAndWait();
+
+		} catch (LoadException e) {
+			System.out.println("NewVehicle.fxml betöltése sikertelen!");
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -18,8 +18,8 @@ public class Vehicle {
 	private LongProperty purchasePrice;
 	private LongProperty salePrice;
 	private LongProperty km;
-	private ObjectProperty<Uzemanyag> fuel;
-	private ObjectProperty<Allapot> condition;
+	private ObjectProperty<Fuel> fuel;
+	private ObjectProperty<Condition> condition;
 	private StringProperty description;
 
 	public Vehicle() {
@@ -40,8 +40,8 @@ public class Vehicle {
 		this.purchasePrice = new SimpleLongProperty(1000000);
 		this.salePrice = new SimpleLongProperty(1100000);
 		this.km = new SimpleLongProperty(200000);
-		this.fuel = new SimpleObjectProperty<>(Uzemanyag.benzin);
-		this.condition = new SimpleObjectProperty<>(Allapot.megkímélt);
+		this.fuel = new SimpleObjectProperty<>(Fuel.benzin);
+		this.condition = new SimpleObjectProperty<>(Condition.megkímélt);
 		this.description = new SimpleStringProperty("Üres leírás");
 		//this.image = new SimpleObjectProperty<>()
 	}
@@ -142,27 +142,27 @@ public class Vehicle {
 		this.km.set(km);
 	}
 
-	public Uzemanyag getFuel() {
+	public Fuel getFuel() {
 		return fuel.get();
 	}
 
-	public ObjectProperty<Uzemanyag> fuelProperty() {
+	public ObjectProperty<Fuel> fuelProperty() {
 		return fuel;
 	}
 
-	public void setFuel(Uzemanyag fuel) {
+	public void setFuel(Fuel fuel) {
 		this.fuel.set(fuel);
 	}
 
-	public Allapot getCondition() {
+	public Condition getCondition() {
 		return condition.get();
 	}
 
-	public ObjectProperty<Allapot> conditionProperty() {
+	public ObjectProperty<Condition> conditionProperty() {
 		return condition;
 	}
 
-	public void setCondition(Allapot condition) {
+	public void setCondition(Condition condition) {
 		this.condition.set(condition);
 	}
 

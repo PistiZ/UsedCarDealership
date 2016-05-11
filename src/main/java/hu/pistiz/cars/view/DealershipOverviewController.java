@@ -43,9 +43,15 @@ public class DealershipOverviewController {
 	}
 
 	@FXML
+	private void handleNewVehicle() {
+		mainApp.showNewVehicleDialog();
+	}
+
+	@FXML
 	private void handleViewVehicle() {
 		Vehicle vehicle = vehicleTable.getSelectionModel().getSelectedItem();
-		mainApp.showViewVehicleDialog(vehicle);
+		if (vehicle != null)
+			mainApp.showViewVehicleDialog(vehicle);
 	}
 
 	@FXML

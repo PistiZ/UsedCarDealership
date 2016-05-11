@@ -37,7 +37,7 @@
                   </Label>
                   <VBox alignment="CENTER" layoutX="38.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" spacing="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="185.0" text="Új jármű felvétele...">
+                        <Button mnemonicParsing="false" onAction="#handleNewVehicle" prefWidth="185.0" text="Új jármű felvétele...">
                            <font>
                               <Font size="16.0" />
                            </font>
