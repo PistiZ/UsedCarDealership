@@ -2,13 +2,10 @@ package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.model.*;
 import hu.pistiz.cars.util.LicensePlateNumberUtil;
-import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.Year;
@@ -33,9 +30,9 @@ public class EditVehicleController {
 	@FXML
 	private TextField kmField;
 	@FXML
-	private ChoiceBox<Fuel> fuelBox;
+	private ComboBox<Fuel> fuelBox;
 	@FXML
-	private ChoiceBox<Condition> conditionBox;
+	private ComboBox<Condition> conditionBox;
 	@FXML
 	private TextArea descriptionArea;
 
@@ -68,7 +65,9 @@ public class EditVehicleController {
 			purchasePriceField.setText(Long.toString(vehicle.getPurchasePrice()));
 			salePriceField.setText(Long.toString(vehicle.getSalePrice()));
 			kmField.setText(Long.toString(vehicle.getKm()));
+			fuelBox.setItems(FXCollections.observableArrayList(Fuel.values()));
 			fuelBox.setValue(vehicle.getFuel());
+			conditionBox.setItems(FXCollections.observableArrayList(Condition.values()));
 			conditionBox.setValue(vehicle.getCondition());
 			descriptionArea.setText(vehicle.getDescription());
 		}

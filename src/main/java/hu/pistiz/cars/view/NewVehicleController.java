@@ -4,11 +4,8 @@ import hu.pistiz.cars.model.*;
 import hu.pistiz.cars.util.LicensePlateNumberUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.Year;
@@ -33,9 +30,9 @@ public class NewVehicleController {
 	@FXML
 	private TextField kmField;
 	@FXML
-	private ChoiceBox<Fuel> fuelBox;
+	private ComboBox<Fuel> fuelBox;
 	@FXML
-	private ChoiceBox<Condition> conditionBox;
+	private ComboBox<Condition> conditionBox;
 	@FXML
 	private TextArea descriptionArea;
 

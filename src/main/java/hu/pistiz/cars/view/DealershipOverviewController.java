@@ -69,6 +69,14 @@ public class DealershipOverviewController {
 		if (vehicle != null) {
 			mainApp.showEditVehicleDialog(vehicle);
 			initialize();
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Üres kijelölés");
+			alert.setHeaderText("Nem jelöltél ki járművet");
+			alert.setContentText("Jelölj ki egy járművet a szerkesztéshez!");
+
+			alert.showAndWait();
 		}
 	}
 
