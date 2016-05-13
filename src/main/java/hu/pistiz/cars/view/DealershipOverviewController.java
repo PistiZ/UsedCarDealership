@@ -1,8 +1,8 @@
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.MainApp;
-import hu.pistiz.cars.model.Vehicle;
-import hu.pistiz.cars.model.VehicleDAOImpl;
+import hu.pistiz.cars.model.Car;
+import hu.pistiz.cars.model.CarDAOImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -12,18 +12,18 @@ import java.util.Optional;
 public class DealershipOverviewController {
 
 	@FXML
-	private TableView<Vehicle> vehicleTable;
+	private TableView<Car> carTable;
 	@FXML
-	private TableColumn<Vehicle, String> brandColumn;
+	private TableColumn<Car, String> brandColumn;
 	@FXML
-	private TableColumn<Vehicle, String> modelColumn;
+	private TableColumn<Car, String> modelColumn;
 	@FXML
-	private TableColumn<Vehicle, String> variantColumn;
+	private TableColumn<Car, String> variantColumn;
 	@FXML
-	private TableColumn<Vehicle, String> licensePlateNumberColumn;
+	private TableColumn<Car, String> licensePlateNumberColumn;
 
 	private MainApp mainApp;
-	private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+	private CarDAOImpl carDAO = new CarDAOImpl();
 
 	public DealershipOverviewController() {
 	}
@@ -37,7 +37,7 @@ public class DealershipOverviewController {
 
 		//showVehicleDetails(null);
 
-		/*vehicleTable.getSelectionModel().selectedItemProperty().addListener(
+		/*carTable.getSelectionModel().selectedItemProperty().addListener(
 				((observable, oldValue, newValue) -> showVehicleDetails(newValue))
 		);*/
 	}
@@ -49,9 +49,9 @@ public class DealershipOverviewController {
 
 	@FXML
 	private void handleViewVehicle() {
-		Vehicle vehicle = vehicleTable.getSelectionModel().getSelectedItem();
-		if (vehicle != null)
-			mainApp.showViewVehicleDialog(vehicle);
+		Car car = carTable.getSelectionModel().getSelectedItem();
+		if (car != null)
+			mainApp.showViewVehicleDialog(car);
 		else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
@@ -65,9 +65,9 @@ public class DealershipOverviewController {
 
 	@FXML
 	private void handleEditVehicle() {
-		Vehicle vehicle = vehicleTable.getSelectionModel().getSelectedItem();
-		if (vehicle != null) {
-			mainApp.showEditVehicleDialog(vehicle);
+		Car car = carTable.getSelectionModel().getSelectedItem();
+		if (car != null) {
+			mainApp.showEditVehicleDialog(car);
 			initialize();
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -82,7 +82,7 @@ public class DealershipOverviewController {
 
 	@FXML
 	private void handleDeleteVehicle() {
-		int selectedIndex = vehicleTable.getSelectionModel().getSelectedIndex();
+		int selectedIndex = carTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.initOwner(mainApp.getPrimaryStage());
@@ -90,7 +90,7 @@ public class DealershipOverviewController {
 			alert.setHeaderText("Biztosan törlöd a kiválaszott járművet?");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK){
-				vehicleTable.getItems().remove(selectedIndex);
+				carTable.getItems().remove(selectedIndex);
 			} else {
 				alert.close();
 			}
@@ -105,39 +105,11 @@ public class DealershipOverviewController {
 		}
 	}
 
-	/*private void showVehicleDetails(Vehicle vehicle) {
-		if (vehicle != null) {
-			brandLabel.setText(vehicle.getBrand());
-			modelLabel.setText(vehicle.getModel());
-			variantLabel.setText(vehicle.getVariant());
-			licensePlateNumberLabel.setText(vehicle.getLicensePlateNumber());
-			dateLabel.setText(vehicle.getDate().toString());
-			purchasePriceLabel.setText(vehicleDAO.priceToString(vehicle.purchasePriceProperty().longValue()));
-			salePriceLabel.setText(vehicleDAO.priceToString(vehicle.salePriceProperty().longValue()));
-			kmLabel.setText(vehicleDAO.kmToString(vehicle.kmProperty().longValue()));
-			fuelLabel.setText(vehicle.getFuel().toString());
-			conditionLabel.setText(vehicle.getCondition().toString());
-			descriptionLabel.setText(vehicle.getDescription());
-		}
-		else {
-			brandLabel.setText("");
-			modelLabel.setText("");
-			variantLabel.setText("");
-			dateLabel.setText("");
-			purchasePriceLabel.setText("");
-			salePriceLabel.setText("");
-			kmLabel.setText("");
-			fuelLabel.setText("");
-			conditionLabel.setText("");
-			descriptionLabel.setText("");
-		}
-	}*/
-
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 
 		// Add observable list data to the table
-		vehicleTable.setItems(mainApp.getVehicleData());
+		carTable.setItems(mainApp.getCarData());
 	}
 
 }

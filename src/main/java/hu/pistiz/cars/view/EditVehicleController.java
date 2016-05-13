@@ -37,8 +37,8 @@ public class EditVehicleController {
 	private TextArea descriptionArea;
 
 	private Stage dialogStage;
-	private Vehicle vehicle;
-	private VehicleDAO vehicleDAO = new VehicleDAOImpl();
+	private Car car;
+	private CarDAO carDAO = new CarDAOImpl();
 	private boolean saveClicked = false;
 
 	public void setDialogStage(Stage dialogStage) {
@@ -53,23 +53,23 @@ public class EditVehicleController {
 	private void initialize() {
 	}
 
-	public void setAndPrintVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
+	public void setAndPrintVehicle(Car car) {
+		this.car = car;
 
-		if (vehicle != null) {
-			brandField.setText(vehicle.getBrand());
-			modelField.setText(vehicle.getModel());
-			variantField.setText(vehicle.getVariant());
-			licensePlateNumberField.setText(vehicle.getLicensePlateNumber());
-			dateField.setText(vehicle.getDate().toString());
-			purchasePriceField.setText(Long.toString(vehicle.getPurchasePrice()));
-			salePriceField.setText(Long.toString(vehicle.getSalePrice()));
-			kmField.setText(Long.toString(vehicle.getKm()));
+		if (car != null) {
+			brandField.setText(car.getBrand());
+			modelField.setText(car.getModel());
+			variantField.setText(car.getVariant());
+			licensePlateNumberField.setText(car.getLicensePlateNumber());
+			dateField.setText(car.getDate().toString());
+			purchasePriceField.setText(Long.toString(car.getPurchasePrice()));
+			salePriceField.setText(Long.toString(car.getSalePrice()));
+			kmField.setText(Long.toString(car.getKm()));
 			fuelBox.setItems(FXCollections.observableArrayList(Fuel.values()));
-			fuelBox.setValue(vehicle.getFuel());
+			fuelBox.setValue(car.getFuel());
 			conditionBox.setItems(FXCollections.observableArrayList(Condition.values()));
-			conditionBox.setValue(vehicle.getCondition());
-			descriptionArea.setText(vehicle.getDescription());
+			conditionBox.setValue(car.getCondition());
+			descriptionArea.setText(car.getDescription());
 		}
 	}
 
@@ -158,17 +158,17 @@ public class EditVehicleController {
 	@FXML
 	private void handleSave() {
 		if (isInputValid()) {
-			vehicle.setBrand(brandField.getText());
-			vehicle.setModel(modelField.getText());
-			vehicle.setVariant(variantField.getText());
-			vehicle.setLicensePlateNumber(licensePlateNumberField.getText());
-			vehicle.setDate(Year.parse(dateField.getText()));
-			vehicle.setPurchasePrice(Long.parseLong(purchasePriceField.getText()));
-			vehicle.setSalePrice(Long.parseLong(salePriceField.getText()));
-			vehicle.setKm(Long.parseLong(kmField.getText()));
-			vehicle.setFuel(fuelBox.getValue());
-			vehicle.setCondition(conditionBox.getValue());
-			vehicle.setDescription(descriptionArea.getText());
+			car.setBrand(brandField.getText());
+			car.setModel(modelField.getText());
+			car.setVariant(variantField.getText());
+			car.setLicensePlateNumber(licensePlateNumberField.getText());
+			car.setDate(Year.parse(dateField.getText()));
+			car.setPurchasePrice(Long.parseLong(purchasePriceField.getText()));
+			car.setSalePrice(Long.parseLong(salePriceField.getText()));
+			car.setKm(Long.parseLong(kmField.getText()));
+			car.setFuel(fuelBox.getValue());
+			car.setCondition(conditionBox.getValue());
+			car.setDescription(descriptionArea.getText());
 
 			saveClicked = true;
 			dialogStage.close();

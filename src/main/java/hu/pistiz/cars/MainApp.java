@@ -1,6 +1,6 @@
 package hu.pistiz.cars;
 
-import hu.pistiz.cars.model.Vehicle;
+import hu.pistiz.cars.model.Car;
 import hu.pistiz.cars.view.DealershipOverviewController;
 import hu.pistiz.cars.view.EditVehicleController;
 import hu.pistiz.cars.view.NewVehicleController;
@@ -23,20 +23,18 @@ public class MainApp extends Application {
 	private Stage primaryStage;
 	private BorderPane rootPane;
 
-	private ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
+	private ObservableList<Car> carData = FXCollections.observableArrayList();
 
 	public MainApp() {
-		vehicleData.add(new Vehicle("Suzuki", "Swift"));
-		vehicleData.add(new Vehicle("Koenigsegg", "Agera"));
-		vehicleData.add(new Vehicle("Opel", "Astra"));
+		carData.add(new Car());
 	}
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
 
-	public ObservableList<Vehicle> getVehicleData() {
-		return vehicleData;
+	public ObservableList<Car> getCarData() {
+		return carData;
 	}
 
 	public void initRootPane() {
@@ -98,7 +96,7 @@ public class MainApp extends Application {
 		}
 	}
 
-	public void showEditVehicleDialog(Vehicle vehicle) {
+	public void showEditVehicleDialog(Car car) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/EditVehicle.fxml"));
@@ -113,7 +111,7 @@ public class MainApp extends Application {
 
 			EditVehicleController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-			controller.setAndPrintVehicle(vehicle);
+			controller.setAndPrintVehicle(car);
 
 			dialogStage.showAndWait();
 
@@ -122,7 +120,7 @@ public class MainApp extends Application {
 		}
 	}
 
-	public void showViewVehicleDialog(Vehicle vehicle) {
+	public void showViewVehicleDialog(Car car) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/ViewVehicle.fxml"));
@@ -137,7 +135,7 @@ public class MainApp extends Application {
 
 			ViewVehicleController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-			controller.setAndPrintVehicle(vehicle);
+			controller.setAndPrintVehicle(car);
 
 			dialogStage.showAndWait();
 

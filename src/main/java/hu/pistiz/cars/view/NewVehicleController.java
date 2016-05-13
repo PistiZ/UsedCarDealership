@@ -8,6 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Year;
 import java.time.format.DateTimeParseException;
 
@@ -37,8 +40,8 @@ public class NewVehicleController {
 	private TextArea descriptionArea;
 
 	private Stage dialogStage;
-	private Vehicle vehicle;
-	private VehicleDAO vehicleDAO = new VehicleDAOImpl();
+	private Car car;
+	private CarDAO carDAO = new CarDAOImpl();
 	private boolean saveClicked = false;
 
 	public void setDialogStage(Stage dialogStage) {
@@ -151,18 +154,20 @@ public class NewVehicleController {
 	@FXML
 	private void handleSave() {
 		if (isInputValid()) {
-			vehicle = new Vehicle();
-			vehicle.setBrand(brandField.getText());
-			vehicle.setModel(modelField.getText());
-			vehicle.setVariant(variantField.getText());
-			vehicle.setLicensePlateNumber(licensePlateNumberField.getText());
-			vehicle.setDate(Year.parse(dateField.getText()));
-			vehicle.setPurchasePrice(Long.parseLong(purchasePriceField.getText()));
-			vehicle.setSalePrice(Long.parseLong(salePriceField.getText()));
-			vehicle.setKm(Long.parseLong(kmField.getText()));
-			vehicle.setFuel(fuelBox.getValue());
-			vehicle.setCondition(conditionBox.getValue());
-			vehicle.setDescription(descriptionArea.getText());
+			car = new Car();
+			car.setBrand(brandField.getText());
+			car.setModel(modelField.getText());
+			car.setVariant(variantField.getText());
+			car.setLicensePlateNumber(licensePlateNumberField.getText());
+			car.setDate(Year.parse(dateField.getText()));
+			car.setPurchasePrice(Long.parseLong(purchasePriceField.getText()));
+			car.setSalePrice(Long.parseLong(salePriceField.getText()));
+			car.setKm(Long.parseLong(kmField.getText()));
+			car.setFuel(fuelBox.getValue());
+			car.setCondition(conditionBox.getValue());
+			car.setDescription(descriptionArea.getText());
+
+			carDAO.carToXML(car, "cars.xml");
 
 			saveClicked = true;
 			dialogStage.close();

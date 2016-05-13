@@ -4,11 +4,14 @@ import java.time.Year;
 
 import javafx.beans.property.*;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Gépjárművet reprezentáló osztály.
  * Az osztály példányai a kereskedésekben használhatóak fel.
  */
-public class Vehicle {
+@XmlRootElement
+public class Car {
 
 	private StringProperty brand;
 	private StringProperty model;
@@ -22,7 +25,7 @@ public class Vehicle {
 	private ObjectProperty<Condition> condition;
 	private StringProperty description;
 
-	public Vehicle() {
+	public Car() {
 		this(null, null);
 	}
 
@@ -30,7 +33,7 @@ public class Vehicle {
 	 * Constructor with some initial data.
 	 *
 	 */
-	public Vehicle(String brand, String model) {
+	public Car(String brand, String model) {
 		this.brand = new SimpleStringProperty(brand);
 		this.model = new SimpleStringProperty(model);
 		this.licensePlateNumber = new SimpleStringProperty("ASD-123");

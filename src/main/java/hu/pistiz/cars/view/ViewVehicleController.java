@@ -1,12 +1,16 @@
 package hu.pistiz.cars.view;
 
-import hu.pistiz.cars.model.Vehicle;
-import hu.pistiz.cars.model.VehicleDAO;
-import hu.pistiz.cars.model.VehicleDAOImpl;
+import hu.pistiz.cars.model.Car;
+import hu.pistiz.cars.model.CarDAO;
+import hu.pistiz.cars.model.CarDAOImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+import java.io.InputStream;
 
 public class ViewVehicleController {
 
@@ -32,10 +36,12 @@ public class ViewVehicleController {
 	private Label conditionLabel;
 	@FXML
 	private TextArea descriptionArea;
+	@FXML
+	private ImageView image;
 
 	private Stage dialogStage;
-	private Vehicle vehicle;
-	private VehicleDAO vehicleDAO = new VehicleDAOImpl();
+	private Car car;
+	private CarDAO carDAO = new CarDAOImpl();
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
@@ -43,23 +49,26 @@ public class ViewVehicleController {
 
 	@FXML
 	private void initialize() {
+		InputStream agera = this.getClass().getClassLoader().getResourceAsStream("agera.jpg");
+		Image pic = new Image(agera);
+		image.setImage(pic);
 	}
 
-	public void setAndPrintVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
+	public void setAndPrintVehicle(Car car) {
+		this.car = car;
 
-		if (vehicle != null) {
-			brandLabel.setText(vehicle.getBrand());
-			modelLabel.setText(vehicle.getModel());
-			variantLabel.setText(vehicle.getVariant());
-			licensePlateNumberLabel.setText(vehicle.getLicensePlateNumber());
-			dateLabel.setText(vehicle.getDate().toString());
-			purchasePriceLabel.setText(vehicleDAO.priceToString(vehicle.purchasePriceProperty().longValue()));
-			salePriceLabel.setText(vehicleDAO.priceToString(vehicle.salePriceProperty().longValue()));
-			kmLabel.setText(vehicleDAO.kmToString(vehicle.kmProperty().longValue()));
-			fuelLabel.setText(vehicle.getFuel().toString());
-			conditionLabel.setText(vehicle.getCondition().toString());
-			descriptionArea.setText(vehicle.getDescription());
+		if (car != null) {
+			brandLabel.setText(car.getBrand());
+			modelLabel.setText(car.getModel());
+			variantLabel.setText(car.getVariant());
+			licensePlateNumberLabel.setText(car.getLicensePlateNumber());
+			dateLabel.setText(car.getDate().toString());
+			purchasePriceLabel.setText(carDAO.priceToString(car.purchasePriceProperty().longValue()));
+			salePriceLabel.setText(carDAO.priceToString(car.salePriceProperty().longValue()));
+			kmLabel.setText(carDAO.kmToString(car.kmProperty().longValue()));
+			fuelLabel.setText(car.getFuel().toString());
+			conditionLabel.setText(car.getCondition().toString());
+			descriptionArea.setText(car.getDescription());
 		}
 		else {
 			brandLabel.setText("");
