@@ -1,2 +1,2 @@
 # UsedCarDealership
-Használtautók nyilvántartása kereskedői oldalról, ajánlatok böngészése vásárlói szempontból.
+Használtautók nyilvántartása kereskedői szempontból.
