@@ -1,41 +1,71 @@
 package hu.pistiz.cars.model;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class Dealership {
 
-	private StringProperty name;
+	@XmlElement
+	private int numberOfCars;
+	@XmlElement
+	private String name;
+	@XmlElement
+	private String address;
+	@XmlElement
+	private String companyName;
 	private Person owner;
 
+	@XmlElement
 	private long income;
 	private List<Car> carsForSale;
 	private List<Car> soldCars;
 
 	public Dealership() {
-		this(null, null);
+		this(0, null, null);
 	}
 
-	public Dealership(String name, Person owner) {
-		this.name.set(name);
-		this.owner = owner;
+	public Dealership(int numberOfCars, String name, Person owner) {
+		this.numberOfCars = numberOfCars;
+		this.name = name;
+		this.address = null;
+		this.companyName = null;
+		this.owner = new Person();
 		this.income = 0;
 		this.carsForSale = new ArrayList<Car>();
 		this.soldCars = new ArrayList<Car>();
 	}
 
 	public String getName() {
-		return name.get();
-	}
-
-	public StringProperty nameProperty() {
 		return name;
 	}
 
 	public void setName(String name) {
-		this.name.set(name);
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address= address;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public Person getOwner() {
@@ -60,5 +90,9 @@ public class Dealership {
 
 	public void setSoldCars(List<Car> soldCars) {
 		this.soldCars = soldCars;
+	}
+
+	public int getNumberOfCars() {
+		return numberOfCars;
 	}
 }

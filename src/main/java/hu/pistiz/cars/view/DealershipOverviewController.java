@@ -1,8 +1,7 @@
 package hu.pistiz.cars.view;
 
-import hu.pistiz.cars.MainApp;
+import hu.pistiz.cars.CarDealershipHandler;
 import hu.pistiz.cars.model.Car;
-import hu.pistiz.cars.model.CarDAOImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -11,6 +10,8 @@ import java.util.Optional;
 
 public class DealershipOverviewController {
 
+	@FXML
+	private Label companyNameLabel;
 	@FXML
 	private TableView<Car> carTable;
 	@FXML
@@ -22,8 +23,8 @@ public class DealershipOverviewController {
 	@FXML
 	private TableColumn<Car, String> licensePlateNumberColumn;
 
-	private MainApp mainApp;
-	private CarDAOImpl carDAO = new CarDAOImpl();
+	private CarDealershipHandler handler;
+	//private XMLCarDAO carDAO = new XMLCarDAO();
 
 	public DealershipOverviewController() {
 	}
@@ -44,17 +45,17 @@ public class DealershipOverviewController {
 
 	@FXML
 	private void handleNewVehicle() {
-		mainApp.showNewVehicleDialog();
+		handler.showNewVehicleDialog();
 	}
 
 	@FXML
 	private void handleViewVehicle() {
 		Car car = carTable.getSelectionModel().getSelectedItem();
 		if (car != null)
-			mainApp.showViewVehicleDialog(car);
+			handler.showViewVehicleDialog(car);
 		else {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(mainApp.getPrimaryStage());
+			alert.initOwner(handler.getPrimaryStage());
 			alert.setTitle("Üres kijelölés");
 			alert.setHeaderText("Nem jelöltél ki járművet");
 			alert.setContentText("Jelölj ki egy járművet a megtekintéshez!");
@@ -67,11 +68,11 @@ public class DealershipOverviewController {
 	private void handleEditVehicle() {
 		Car car = carTable.getSelectionModel().getSelectedItem();
 		if (car != null) {
-			mainApp.showEditVehicleDialog(car);
+			handler.showEditVehicleDialog(car);
 			initialize();
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(mainApp.getPrimaryStage());
+			alert.initOwner(handler.getPrimaryStage());
 			alert.setTitle("Üres kijelölés");
 			alert.setHeaderText("Nem jelöltél ki járművet");
 			alert.setContentText("Jelölj ki egy járművet a szerkesztéshez!");
@@ -85,7 +86,7 @@ public class DealershipOverviewController {
 		int selectedIndex = carTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.initOwner(mainApp.getPrimaryStage());
+			alert.initOwner(handler.getPrimaryStage());
 			alert.setTitle("Törlés megerősítése");
 			alert.setHeaderText("Biztosan törlöd a kiválaszott járművet?");
 			Optional<ButtonType> result = alert.showAndWait();
@@ -96,7 +97,7 @@ public class DealershipOverviewController {
 			}
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(mainApp.getPrimaryStage());
+			alert.initOwner(handler.getPrimaryStage());
 			alert.setTitle("Üres kijelölés");
 			alert.setHeaderText("Nem jelöltél ki járművet");
 			alert.setContentText("Jelölj ki egy járművet a törléshez!");
@@ -105,11 +106,15 @@ public class DealershipOverviewController {
 		}
 	}
 
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
+	public void setCompanyNameLabelText(String text) {
+		companyNameLabel.setText(text);
+	}
+
+	public void setHandler(CarDealershipHandler handler) {
+		this.handler = handler;
 
 		// Add observable list data to the table
-		carTable.setItems(mainApp.getCarData());
+		//carTable.setItems(handler.getCarData());
 	}
 
 }

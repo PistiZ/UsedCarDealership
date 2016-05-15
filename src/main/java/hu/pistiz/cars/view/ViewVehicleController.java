@@ -2,7 +2,7 @@ package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.model.Car;
 import hu.pistiz.cars.model.CarDAO;
-import hu.pistiz.cars.model.CarDAOImpl;
+import hu.pistiz.cars.model.XMLCarDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -41,7 +41,7 @@ public class ViewVehicleController {
 
 	private Stage dialogStage;
 	private Car car;
-	private CarDAO carDAO = new CarDAOImpl();
+	private CarDAO carDAO = new XMLCarDAO();
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;

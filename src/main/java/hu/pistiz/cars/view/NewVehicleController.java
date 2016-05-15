@@ -8,9 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Year;
 import java.time.format.DateTimeParseException;
 
@@ -41,7 +38,7 @@ public class NewVehicleController {
 
 	private Stage dialogStage;
 	private Car car;
-	private CarDAO carDAO = new CarDAOImpl();
+	private CarDAO carDAO = new XMLCarDAO();
 	private boolean saveClicked = false;
 
 	public void setDialogStage(Stage dialogStage) {
@@ -166,8 +163,6 @@ public class NewVehicleController {
 			car.setFuel(fuelBox.getValue());
 			car.setCondition(conditionBox.getValue());
 			car.setDescription(descriptionArea.getText());
-
-			carDAO.carToXML(car, "cars.xml");
 
 			saveClicked = true;
 			dialogStage.close();

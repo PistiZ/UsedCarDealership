@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Car {
 
+
+	private int id;
 	private StringProperty brand;
 	private StringProperty model;
 	private StringProperty variant;
@@ -24,6 +26,8 @@ public class Car {
 	private ObjectProperty<Fuel> fuel;
 	private ObjectProperty<Condition> condition;
 	private StringProperty description;
+
+	private Dealership dealership;
 
 	public Car() {
 		this(null, null);
@@ -47,6 +51,14 @@ public class Car {
 		this.condition = new SimpleObjectProperty<>(Condition.megkímélt);
 		this.description = new SimpleStringProperty("Üres leírás");
 		//this.image = new SimpleObjectProperty<>()
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getBrand() {
@@ -179,5 +191,13 @@ public class Car {
 
 	public void setDescription(String description) {
 		this.description.set(description);
+	}
+
+	public Dealership getDealership() {
+		return dealership;
+	}
+
+	public void setDealership(Dealership dealership) {
+		this.dealership = dealership;
 	}
 }

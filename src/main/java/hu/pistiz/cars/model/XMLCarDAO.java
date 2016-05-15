@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class CarDAOImpl implements CarDAO {
+public class XMLCarDAO implements CarDAO {
 
 	@Override
 	public String priceToString(long price) {
@@ -20,7 +20,7 @@ public class CarDAOImpl implements CarDAO {
 		return Long.toString(km) + " km";
 	}
 
-	@Override
+	/*@Override
 	public void carToXML(Car car, String fileName) {
 		Path dir = Paths.get(System.getProperty("user.home"), ".UserCarDealershipFiles");
 		Path path = Paths.get(System.getProperty("user.home"), ".UserCarDealershipFiles", fileName);
@@ -39,6 +39,6 @@ public class CarDAOImpl implements CarDAO {
 		} catch (JAXBException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 }

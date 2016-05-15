@@ -38,7 +38,7 @@ public class EditVehicleController {
 
 	private Stage dialogStage;
 	private Car car;
-	private CarDAO carDAO = new CarDAOImpl();
+	private CarDAO carDAO = new XMLCarDAO();
 	private boolean saveClicked = false;
 
 	public void setDialogStage(Stage dialogStage) {
