@@ -174,7 +174,7 @@ public class NewVehicleController {
 			try {
 				handler.getCarDAO().addCarForSale(car);
 				handler.getDealership().getCarsForSale().add(car);
-				//handler.getCarData().add(car);
+				handler.getCarData().add(car);
 			} catch (FileAlreadyExistsException e) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Létező jármű");

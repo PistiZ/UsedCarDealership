@@ -128,6 +128,13 @@ public class XMLCarDAO implements CarDAO {
 		}
 	}
 
+	@Override
+	public void removeCarByLPN(String licensePlateNumber) {
+		File carFile = new File((Paths.get(carsForSaleDir.toString(), licensePlateNumber + ".xml")).toUri());
+		if (carFile.exists())
+			carFile.delete();
+	}
+
 	/*@Override
 	public void carToXML(Car car, String fileName) {
 		Path dir = Paths.get(System.getProperty("user.home"), ".UserCarDealershipFiles");

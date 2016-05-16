@@ -85,7 +85,8 @@ public class DealershipOverviewController {
 			alert.setTitle("Törlés megerősítése");
 			alert.setHeaderText("Biztosan törlöd a kiválaszott járművet?");
 			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK){
+			if (result.get() == ButtonType.OK) {
+				handler.getCarDAO().removeCarByLPN(carTable.getSelectionModel().getSelectedItem().getLicensePlateNumber());
 				carTable.getItems().remove(selectedIndex);
 			} else {
 				alert.close();

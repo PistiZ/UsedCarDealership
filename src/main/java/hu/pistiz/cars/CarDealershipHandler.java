@@ -239,6 +239,8 @@ public class CarDealershipHandler extends Application {
 
 		if (createRootDirectories())
 			showWelcomeStage();
+		else if (!(new File(PathUtil.getDealershipDir() + System.getProperty("file.separator") + "dealership.xml").exists()))
+			showWelcomeStage();
 		else {
 			initDealership();
 			showDealershipOverview();

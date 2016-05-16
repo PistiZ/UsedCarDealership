@@ -20,4 +20,6 @@ public interface CarDAO {
 
 	void updateCar(Car car);
 
+	void removeCarByLPN(String licensePlateNumber);
+
 }
