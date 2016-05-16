@@ -2,6 +2,7 @@ package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.CarDealershipHandler;
 import hu.pistiz.cars.model.Car;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -31,16 +32,10 @@ public class DealershipOverviewController {
 
 	@FXML
 	private void initialize() {
-		brandColumn.setCellValueFactory(cellData -> cellData.getValue().brandProperty());
-		modelColumn.setCellValueFactory(cellData -> cellData.getValue().modelProperty());
-		variantColumn.setCellValueFactory(cellData -> cellData.getValue().variantProperty());
-		licensePlateNumberColumn.setCellValueFactory(cellData -> cellData.getValue().licensePlateNumberProperty());
-
-		//showVehicleDetails(null);
-
-		/*carTable.getSelectionModel().selectedItemProperty().addListener(
-				((observable, oldValue, newValue) -> showVehicleDetails(newValue))
-		);*/
+		brandColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBrand()));
+		modelColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getModel()));
+		variantColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVariant()));
+		licensePlateNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLicensePlateNumber()));
 	}
 
 	@FXML
@@ -69,7 +64,7 @@ public class DealershipOverviewController {
 		Car car = carTable.getSelectionModel().getSelectedItem();
 		if (car != null) {
 			handler.showEditVehicleDialog(car);
-			initialize();
+			carTable.setItems(handler.getCarData());
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(handler.getPrimaryStage());
@@ -114,7 +109,7 @@ public class DealershipOverviewController {
 		this.handler = handler;
 
 		// Add observable list data to the table
-		//carTable.setItems(handler.getCarData());
+		carTable.setItems(handler.getCarData());
 	}
 
 }

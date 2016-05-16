@@ -32,10 +32,6 @@ public class WelcomeStageController {
 	private Stage stage;
 
 	private CarDealershipHandler handler;
-	private Dealership dealership;
-	private DealershipDAO dealershipDAO;
-
-
 
 	public WelcomeStageController() {
 	}
@@ -46,7 +42,7 @@ public class WelcomeStageController {
 
 	@FXML
 	private void handleSave() {
-		dealership = new Dealership();
+		Dealership dealership = handler.getDealership();
 		if (isInputValid()) {
 			dealership.setName(dealershipNameField.getText());
 			dealership.setCompanyName(dealershipCompanyField.getText());
@@ -56,6 +52,7 @@ public class WelcomeStageController {
 			dealership.getOwner().setDateOfBirth(birthdayPicker.getValue());
 			handler.setDealership(dealership);
 			handler.getDealershipDAO().addDealership(dealership);
+			handler.getPersonDAO().addPerson(dealership.getOwner());
 
 			handler.showDealershipOverview();
 		}

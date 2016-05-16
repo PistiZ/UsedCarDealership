@@ -16,7 +16,7 @@ public class XMLDealershipDAO implements DealershipDAO {
 	@Override
 	public void addDealership(Dealership dealership) {
 		try {
-			File dealershipFile = new File((Paths.get(dealershipDir.toUri()).toString() + "dealership.xml"));
+			File dealershipFile = new File((Paths.get(dealershipDir.toString(), "dealership.xml")).toUri());
 			boolean fileCreated = false;
 			try {
 				fileCreated = dealershipFile.createNewFile();
@@ -32,10 +32,10 @@ public class XMLDealershipDAO implements DealershipDAO {
 	}
 
 	@Override
-	public Dealership getDealership() throws FileNotFoundException{
+	public Dealership getDealership() throws FileNotFoundException {
 		Dealership dealership = null;
 		try {
-			dealership = JAXBUtil.fromXML(Dealership.class, new FileInputStream(new File((Paths.get(dealershipDir.toUri()).toString() + "dealership.xml"))));
+			dealership = JAXBUtil.fromXML(Dealership.class, new FileInputStream(new File((Paths.get(dealershipDir.toString(), "dealership.xml")).toUri())));
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

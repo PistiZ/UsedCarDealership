@@ -1,11 +1,8 @@
-/**
- * Modell-osztályokat tartalmazó csomag.
- */
 @XmlJavaTypeAdapters({
 		@XmlJavaTypeAdapter(type = Year.class, value = YearAdapter.class),
 		@XmlJavaTypeAdapter(type = LocalDate.class, value = LocalDateAdapter.class)
 })
-package hu.pistiz.cars.model;
+package hu.pistiz.cars;
 
 import hu.pistiz.cars.util.LocalDateAdapter;
 import hu.pistiz.cars.util.YearAdapter;

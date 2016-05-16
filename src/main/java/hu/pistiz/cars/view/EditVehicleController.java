@@ -1,5 +1,6 @@
 package hu.pistiz.cars.view;
 
+import hu.pistiz.cars.CarDealershipHandler;
 import hu.pistiz.cars.model.*;
 import hu.pistiz.cars.util.LicensePlateNumberUtil;
 import javafx.collections.FXCollections;
@@ -37,12 +38,17 @@ public class EditVehicleController {
 	private TextArea descriptionArea;
 
 	private Stage dialogStage;
+
+	private CarDealershipHandler handler;
 	private Car car;
-	private CarDAO carDAO = new XMLCarDAO();
 	private boolean saveClicked = false;
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
+	}
+
+	public void setHandler(CarDealershipHandler handler) {
+		this.handler = handler;
 	}
 
 	public boolean isSaveClicked() {
@@ -53,7 +59,7 @@ public class EditVehicleController {
 	private void initialize() {
 	}
 
-	public void setAndPrintVehicle(Car car) {
+	public void setAndPrintCar(Car car) {
 		this.car = car;
 
 		if (car != null) {
@@ -169,6 +175,9 @@ public class EditVehicleController {
 			car.setFuel(fuelBox.getValue());
 			car.setCondition(conditionBox.getValue());
 			car.setDescription(descriptionArea.getText());
+
+			handler.getCarDAO().updateCar(car);
+			handler.setCarData(handler.carDAO.getCarsForSale());
 
 			saveClicked = true;
 			dialogStage.close();

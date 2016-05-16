@@ -63,9 +63,9 @@ public class ViewVehicleController {
 			variantLabel.setText(car.getVariant());
 			licensePlateNumberLabel.setText(car.getLicensePlateNumber());
 			dateLabel.setText(car.getDate().toString());
-			purchasePriceLabel.setText(carDAO.priceToString(car.purchasePriceProperty().longValue()));
-			salePriceLabel.setText(carDAO.priceToString(car.salePriceProperty().longValue()));
-			kmLabel.setText(carDAO.kmToString(car.kmProperty().longValue()));
+			purchasePriceLabel.setText(carDAO.priceToString(car.getPurchasePrice()));
+			salePriceLabel.setText(carDAO.priceToString(car.getSalePrice()));
+			kmLabel.setText(carDAO.kmToString(car.getKm()));
 			fuelLabel.setText(car.getFuel().toString());
 			conditionLabel.setText(car.getCondition().toString());
 			descriptionArea.setText(car.getDescription());

@@ -1,8 +1,5 @@
 package hu.pistiz.cars.model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,8 +11,6 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Dealership {
 
-	@XmlElement
-	private int numberOfCars;
 	@XmlElement
 	private String name;
 	@XmlElement
@@ -30,11 +25,10 @@ public class Dealership {
 	private List<Car> soldCars;
 
 	public Dealership() {
-		this(0, null, null);
+		this(null);
 	}
 
-	public Dealership(int numberOfCars, String name, Person owner) {
-		this.numberOfCars = numberOfCars;
+	public Dealership(String name) {
 		this.name = name;
 		this.address = null;
 		this.companyName = null;
@@ -92,7 +86,4 @@ public class Dealership {
 		this.soldCars = soldCars;
 	}
 
-	public int getNumberOfCars() {
-		return numberOfCars;
-	}
 }

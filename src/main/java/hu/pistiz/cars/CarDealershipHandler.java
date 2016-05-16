@@ -4,6 +4,8 @@ import hu.pistiz.cars.model.*;
 import hu.pistiz.cars.util.PathUtil;
 import hu.pistiz.cars.view.*;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.LoadException;
 import javafx.scene.Scene;
@@ -24,21 +26,21 @@ public class CarDealershipHandler extends Application {
 
 	private Dealership dealership;
 	public DealershipDAO dealershipDAO;
+	public CarDAO carDAO;
+	public PersonDAO personDAO;
 
-	//private ObservableList<Car> carData = FXCollections.observableArrayList();
+	private ObservableList<Car> carData = FXCollections.observableArrayList();
 
 	public CarDealershipHandler() {
 		dealership = new Dealership();
 		dealershipDAO = XMLDAOFactory.getDealershipDAO();
+		carDAO = XMLDAOFactory.getCarDAO();
+		personDAO = XMLDAOFactory.getPersonDAO();
 	}
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
-
-	/*public ObservableList<Car> getCarData() {
-		return carData;
-	}*/
 
 	public Dealership getDealership() {
 		return dealership;
@@ -46,6 +48,22 @@ public class CarDealershipHandler extends Application {
 
 	public DealershipDAO getDealershipDAO() {
 		return dealershipDAO;
+	}
+
+	public CarDAO getCarDAO() {
+		return carDAO;
+	}
+
+	public PersonDAO getPersonDAO() {
+		return personDAO;
+	}
+
+	public ObservableList<Car> getCarData() {
+		return carData;
+	}
+
+	public void setCarData(ObservableList<Car> carData) {
+		this.carData = carData;
 	}
 
 	public void setDealership(Dealership dealership) {
@@ -120,6 +138,7 @@ public class CarDealershipHandler extends Application {
 			dialogStage.setScene(scene);
 
 			NewVehicleController controller = loader.getController();
+			controller.setHandler(this);
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
@@ -147,7 +166,8 @@ public class CarDealershipHandler extends Application {
 
 			EditVehicleController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-			controller.setAndPrintVehicle(car);
+			controller.setHandler(this);
+			controller.setAndPrintCar(car);
 
 			dialogStage.showAndWait();
 
@@ -184,8 +204,10 @@ public class CarDealershipHandler extends Application {
 		if (!(new File(PathUtil.getMainDir().toUri()).exists())) {
 			try {
 				Files.createDirectory(PathUtil.getMainDir());
-				Files.createDirectory(PathUtil.getCarDir());
 				Files.createDirectory(PathUtil.getDealershipDir());
+				Files.createDirectory(PathUtil.getCarDir());
+				Files.createDirectory(PathUtil.getCarsForSaleDir());
+				Files.createDirectory(PathUtil.getSoldCarsDir());
 				Files.createDirectory(PathUtil.getImageDir());
 				Files.createDirectory(PathUtil.getPersonDir());
 			} catch (IOException e) {
@@ -199,6 +221,10 @@ public class CarDealershipHandler extends Application {
 	private void initDealership() {
 		try {
 			dealership = dealershipDAO.getDealership();
+			dealership.setCarsForSale(carDAO.getCarsForSale());
+			dealership.setSoldCars(carDAO.getSoldCars());
+			dealership.setOwner(personDAO.getPerson());
+			carData = carDAO.getCarsForSale();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

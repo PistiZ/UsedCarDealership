@@ -1,5 +1,6 @@
 package hu.pistiz.cars.view;
 
+import hu.pistiz.cars.CarDealershipHandler;
 import hu.pistiz.cars.model.*;
 import hu.pistiz.cars.util.LicensePlateNumberUtil;
 import javafx.application.Platform;
@@ -8,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+import java.nio.file.FileAlreadyExistsException;
 import java.time.Year;
 import java.time.format.DateTimeParseException;
 
@@ -37,12 +39,17 @@ public class NewVehicleController {
 	private TextArea descriptionArea;
 
 	private Stage dialogStage;
+
+	private CarDealershipHandler handler;
 	private Car car;
-	private CarDAO carDAO = new XMLCarDAO();
 	private boolean saveClicked = false;
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
+	}
+
+	public void setHandler(CarDealershipHandler handler) {
+		this.handler = handler;
 	}
 
 	public boolean isSaveClicked() {
@@ -163,6 +170,19 @@ public class NewVehicleController {
 			car.setFuel(fuelBox.getValue());
 			car.setCondition(conditionBox.getValue());
 			car.setDescription(descriptionArea.getText());
+
+			try {
+				handler.getCarDAO().addCarForSale(car);
+				handler.getDealership().getCarsForSale().add(car);
+				//handler.getCarData().add(car);
+			} catch (FileAlreadyExistsException e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Létező jármű");
+				alert.setHeaderText("Létező jármű");
+				alert.setContentText("A felvett jármű már létezik!");
+
+				alert.showAndWait();
+			}
 
 			saveClicked = true;
 			dialogStage.close();
