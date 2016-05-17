@@ -204,6 +204,31 @@ public class CarDealershipHandler extends Application {
 		}
 	}
 
+	public void showSaleCarDialog(Car car) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(CarDealershipHandler.class.getResource("view/SoldCarView.fxml"));
+			BorderPane borderPane = (BorderPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.initOwner(primaryStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.setTitle("Jármű eladása");
+			Scene scene = new Scene(borderPane);
+			dialogStage.setScene(scene);
+
+			SoldCarViewController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setHandler(this);
+			controller.setAndPrintCar(car);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private boolean createRootDirectories() {
 		if (!(new File(PathUtil.getMainDir().toUri()).exists())) {
 			try {

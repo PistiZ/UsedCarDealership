@@ -44,7 +44,6 @@
             <RowConstraints minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="42.0" minHeight="0.0" prefHeight="16.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="221.0" minHeight="10.0" prefHeight="221.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -52,19 +51,17 @@
             <Label text="Rendszám" />
             <Label text="Évjárat" GridPane.rowIndex="1" />
             <Label text="Vételár" GridPane.rowIndex="2" />
-            <Label text="Eladási ár" GridPane.rowIndex="3" />
-            <Label text="Kilométeróra állása" GridPane.rowIndex="4" />
-            <Label text="Üzemanyag" GridPane.rowIndex="5" />
-            <Label text="Állapot" GridPane.rowIndex="6" />
-            <Label text="Leírás" GridPane.rowIndex="7" />
-            <TextArea fx:id="descriptionArea" editable="false" prefHeight="235.0" prefWidth="295.0" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+            <Label text="Kilométeróra állása" GridPane.rowIndex="3" />
+            <Label text="Üzemanyag" GridPane.rowIndex="4" />
+            <Label text="Állapot" GridPane.rowIndex="5" />
+            <Label text="Leírás" GridPane.rowIndex="6" />
+            <TextArea fx:id="descriptionArea" editable="false" prefHeight="235.0" prefWidth="295.0" GridPane.columnSpan="2" GridPane.rowIndex="7" />
             <Label fx:id="licensePlateNumberLabel" text="Label" GridPane.columnIndex="1" />
             <Label fx:id="dateLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="purchasePriceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="salePriceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="kmLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="fuelLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label fx:id="conditionLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="kmLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="fuelLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="conditionLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Button layoutX="449.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="30.0" prefWidth="110.0" text="Vissza" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">

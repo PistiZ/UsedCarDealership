@@ -37,27 +37,27 @@
                   </Label>
                   <VBox alignment="CENTER" layoutX="38.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" spacing="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleNewVehicle" prefWidth="185.0" text="Új jármű felvétele...">
+                        <Button mnemonicParsing="false" onAction="#handleNewCar" prefWidth="185.0" text="Új jármű felvétele...">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleViewVehicle" prefWidth="185.0" text="Megtekintés...">
+                        <Button mnemonicParsing="false" onAction="#handleViewCar" prefWidth="185.0" text="Megtekintés...">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleEditVehicle" prefWidth="185.0" text="Szerkesztés...">
+                        <Button mnemonicParsing="false" onAction="#handleEditCar" prefWidth="185.0" text="Szerkesztés...">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleDeleteVehicle" prefWidth="185.0" text="Törlés">
+                        <Button mnemonicParsing="false" onAction="#handleDeleteCar" prefWidth="185.0" text="Törlés">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="185.0" text="Eladva">
+                        <Button mnemonicParsing="false" onAction="#handleSaleCar" prefWidth="185.0" text="Eladva">
                            <font>
                               <Font size="16.0" />
                            </font>

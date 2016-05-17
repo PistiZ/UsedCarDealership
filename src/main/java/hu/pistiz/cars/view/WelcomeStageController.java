@@ -71,23 +71,23 @@ public class WelcomeStageController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		if (dealershipNameField.getText() == null || dealershipNameField.getText().length() == 0) {
+		if (dealershipNameField.getText() == null || dealershipNameField.getText().length() == 0 || dealershipNameField.getText().trim().length() == 0) {
 			errorMessage += "Üres kereskedésnév-mező!\n";
 		}
 
-		if (dealershipCompanyField.getText() == null || dealershipCompanyField.getText().length() == 0) {
+		if (dealershipCompanyField.getText() == null || dealershipCompanyField.getText().length() == 0 || dealershipCompanyField.getText().trim().length() == 0) {
 			errorMessage += "Üres cégnév-mező!\n";
 		}
 
-		if (dealershipAddressField.getText() == null || dealershipAddressField.getText().length() == 0) {
+		if (dealershipAddressField.getText() == null || dealershipAddressField.getText().length() == 0 || dealershipAddressField.getText().trim().length() == 0) {
 			errorMessage += "Üres székhely-mező!\n";
 		}
 
-		if (ownerLastNameField.getText() == null || ownerLastNameField.getText().length() == 0) {
+		if (ownerLastNameField.getText() == null || ownerLastNameField.getText().length() == 0 || ownerLastNameField.getText().trim().length() == 0) {
 			errorMessage += "Üres vezetéknév-mező!\n";
 		}
 
-		if (ownerFirstNameField.getText() == null || ownerFirstNameField.getText().length() == 0) {
+		if (ownerFirstNameField.getText() == null || ownerFirstNameField.getText().length() == 0 || ownerFirstNameField.getText().trim().length() == 0) {
 			errorMessage += "Üres székhely-mező!\n";
 		}
 

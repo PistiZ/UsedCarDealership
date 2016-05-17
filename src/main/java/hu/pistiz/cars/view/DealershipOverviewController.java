@@ -42,12 +42,12 @@ public class DealershipOverviewController {
 	}
 
 	@FXML
-	private void handleNewVehicle() {
+	private void handleNewCar() {
 		handler.showNewVehicleDialog();
 	}
 
 	@FXML
-	private void handleViewVehicle() {
+	private void handleViewCar() {
 		Car car = carTable.getSelectionModel().getSelectedItem();
 		if (car != null)
 			handler.showViewVehicleDialog(car);
@@ -63,7 +63,7 @@ public class DealershipOverviewController {
 	}
 
 	@FXML
-	private void handleEditVehicle() {
+	private void handleEditCar() {
 		Car car = carTable.getSelectionModel().getSelectedItem();
 		if (car != null) {
 			handler.showEditVehicleDialog(car);
@@ -80,7 +80,7 @@ public class DealershipOverviewController {
 	}
 
 	@FXML
-	private void handleDeleteVehicle() {
+	private void handleDeleteCar() {
 		int selectedIndex = carTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -100,6 +100,24 @@ public class DealershipOverviewController {
 			alert.setTitle("Üres kijelölés");
 			alert.setHeaderText("Nem jelöltél ki járművet");
 			alert.setContentText("Jelölj ki egy járművet a törléshez!");
+
+			alert.showAndWait();
+		}
+	}
+
+	@FXML
+	private void handleSaleCar() {
+		Car car = carTable.getSelectionModel().getSelectedItem();
+		int selectedIndex = carTable.getSelectionModel().getSelectedIndex();
+		if (car != null) {
+			handler.showSaleCarDialog(car);
+			carTable.getItems().remove(selectedIndex);
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(handler.getPrimaryStage());
+			alert.setTitle("Üres kijelölés");
+			alert.setHeaderText("Nem jelöltél ki járművet");
+			alert.setContentText("Jelölj ki egy járművet az eladáshoz!");
 
 			alert.showAndWait();
 		}

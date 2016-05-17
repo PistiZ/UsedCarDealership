@@ -28,7 +28,6 @@
                 <RowConstraints minHeight="5.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="5.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="5.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="5.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="242.0" minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
             </rowConstraints>
@@ -36,12 +35,11 @@
                 <Label text="Rendszám" GridPane.rowIndex="3" />
                 <Label text="Évjárat" GridPane.rowIndex="4" />
                 <Label text="Vételár" GridPane.rowIndex="5" />
-                <Label text="Eladási ár" GridPane.rowIndex="6" />
-                <Label text="Kilométeróra állása" GridPane.rowIndex="7" />
-                <Label text="Üzemanyag" GridPane.rowIndex="8" />
-                <Label text="Állapot" GridPane.rowIndex="9" />
-                <Label text="Leírás" GridPane.rowIndex="10" />
-                <TextArea fx:id="descriptionArea" prefHeight="235.0" prefWidth="295.0" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+                <Label text="Kilométeróra állása" GridPane.rowIndex="6" />
+                <Label text="Üzemanyag" GridPane.rowIndex="7" />
+                <Label text="Állapot" GridPane.rowIndex="8" />
+                <Label text="Leírás" GridPane.rowIndex="9" />
+                <TextArea fx:id="descriptionArea" prefHeight="235.0" prefWidth="295.0" GridPane.columnSpan="2" GridPane.rowIndex="10" />
                 <Label text="Típus" GridPane.rowIndex="2" />
                 <Label text="Modell" GridPane.rowIndex="1" />
                 <Label text="Márka" />
@@ -51,10 +49,9 @@
                 <TextField fx:id="licensePlateNumberField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="dateField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <TextField fx:id="purchasePriceField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <TextField fx:id="salePriceField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <TextField fx:id="kmField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <ComboBox fx:id="fuelBox" prefHeight="26.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <ComboBox fx:id="conditionBox" prefHeight="26.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <TextField fx:id="kmField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="fuelBox" prefHeight="26.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <ComboBox fx:id="conditionBox" prefHeight="26.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             </children>
         </GridPane>
         <Button layoutX="449.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="30.0" prefWidth="110.0" text="Vissza" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">

@@ -28,8 +28,6 @@ public class NewVehicleController {
 	@FXML
 	private TextField purchasePriceField;
 	@FXML
-	private TextField salePriceField;
-	@FXML
 	private TextField kmField;
 	@FXML
 	private ComboBox<Fuel> fuelBox;
@@ -65,7 +63,6 @@ public class NewVehicleController {
 		licensePlateNumberField.setText("");
 		dateField.setText("");
 		purchasePriceField.setText("");
-		salePriceField.setText("");
 		kmField.setText("");
 		fuelBox.getItems().addAll(Fuel.values());
 		conditionBox.getItems().addAll(Condition.values());
@@ -77,22 +74,22 @@ public class NewVehicleController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		if (brandField.getText() == null || brandField.getText().length() == 0) {
+		if (brandField.getText() == null || brandField.getText().length() == 0 || brandField.getText().trim().length() == 0) {
 			errorMessage += "Nem megfelelő márka!\n";
 		}
 
-		if (modelField.getText() == null || modelField.getText().length() == 0) {
+		if (modelField.getText() == null || modelField.getText().length() == 0 || modelField.getText().trim().length() == 0) {
 			errorMessage += "Nem megfelelő modell!\n";
 		}
 
-		if (licensePlateNumberField.getText() == null || licensePlateNumberField.getText().length() == 0) {
+		if (licensePlateNumberField.getText() == null || licensePlateNumberField.getText().length() == 0 || licensePlateNumberField.getText().trim().length() == 0) {
 			errorMessage += "Üres rendszám-mező!\n";
 		} else {
 			if (!(LicensePlateNumberUtil.isValid(licensePlateNumberField.getText())))
 				errorMessage += "Nem megfelelő rendszám! (3 betű, kötőjel, 3 szám)\n";
 		}
 
-		if (dateField.getText() == null || dateField.getText().length() == 0) {
+		if (dateField.getText() == null || dateField.getText().length() == 0 || dateField.getText().trim().length() == 0) {
 			errorMessage += "Üres évjárat-mező!\n";
 		} else {
 			try {
@@ -103,7 +100,7 @@ public class NewVehicleController {
 			}
 		}
 
-		if (purchasePriceField.getText() == null || purchasePriceField.getText().length() == 0) {
+		if (purchasePriceField.getText() == null || purchasePriceField.getText().length() == 0 || purchasePriceField.getText().trim().length() == 0) {
 			errorMessage += "Üres vételár-mező!\n";
 		} else {
 			try {
@@ -113,17 +110,7 @@ public class NewVehicleController {
 			}
 		}
 
-		if (salePriceField.getText() == null || salePriceField.getText().length() == 0) {
-			errorMessage += "Üres eladási ár-mező!\n";
-		} else {
-			try {
-				Long.parseLong(salePriceField.getText());
-			} catch (NumberFormatException e) {
-				errorMessage += "Egész számot adj meg eladási árnak!\n";
-			}
-		}
-
-		if (kmField.getText() == null || kmField.getText().length() == 0) {
+		if (kmField.getText() == null || kmField.getText().length() == 0 || kmField.getText().trim().length() == 0) {
 			errorMessage += "Üres kilométeróra-állás-mező!\n";
 		} else {
 			try {
@@ -167,7 +154,6 @@ public class NewVehicleController {
 			car.setLicensePlateNumber(licensePlateNumberField.getText());
 			car.setDate(Year.parse(dateField.getText()));
 			car.setPurchasePrice(Long.parseLong(purchasePriceField.getText()));
-			car.setSalePrice(Long.parseLong(salePriceField.getText()));
 			car.setKm(Long.parseLong(kmField.getText()));
 			car.setFuel(fuelBox.getValue());
 			car.setCondition(conditionBox.getValue());
@@ -177,17 +163,17 @@ public class NewVehicleController {
 				handler.getCarDAO().addCarForSale(car);
 				handler.getDealership().getCarsForSale().add(car);
 				handler.getCarData().add(car);
+				dialogStage.close();
 			} catch (FileAlreadyExistsException e) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Létező jármű");
 				alert.setHeaderText("Létező jármű");
-				alert.setContentText("A felvett jármű már létezik!");
+				alert.setContentText(e.getMessage());
 
 				alert.showAndWait();
 			}
 
 			saveClicked = true;
-			dialogStage.close();
 		}
 	}
 

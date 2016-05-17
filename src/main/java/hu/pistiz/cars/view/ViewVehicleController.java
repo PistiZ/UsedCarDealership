@@ -28,8 +28,6 @@ public class ViewVehicleController {
 	@FXML
 	private Label purchasePriceLabel;
 	@FXML
-	private Label salePriceLabel;
-	@FXML
 	private Label kmLabel;
 	@FXML
 	private Label fuelLabel;
@@ -70,7 +68,6 @@ public class ViewVehicleController {
 			licensePlateNumberLabel.setText(car.getLicensePlateNumber());
 			dateLabel.setText(car.getDate().toString());
 			purchasePriceLabel.setText(carDAO.priceToString(car.getPurchasePrice()));
-			salePriceLabel.setText(carDAO.priceToString(car.getSalePrice()));
 			kmLabel.setText(carDAO.kmToString(car.getKm()));
 			fuelLabel.setText(car.getFuel().toString());
 			conditionLabel.setText(car.getCondition().toString());
@@ -82,7 +79,6 @@ public class ViewVehicleController {
 			variantLabel.setText("");
 			dateLabel.setText("");
 			purchasePriceLabel.setText("");
-			salePriceLabel.setText("");
 			kmLabel.setText("");
 			fuelLabel.setText("");
 			conditionLabel.setText("");
