@@ -42,6 +42,10 @@ public class CarDealershipHandler extends Application {
 		return primaryStage;
 	}
 
+	public BorderPane getRootPane() {
+		return rootPane;
+	}
+
 	public Dealership getDealership() {
 		return dealership;
 	}
@@ -89,8 +93,8 @@ public class CarDealershipHandler extends Application {
 		loader.setLocation(CarDealershipHandler.class.getResource("view/WelcomeStage.fxml"));
 		try {
 			AnchorPane anchorPane = (AnchorPane) loader.load();
-			anchorPane.setMaxHeight(rootPane.getPrefHeight());
-			anchorPane.setMaxWidth(rootPane.getPrefWidth());
+			/*anchorPane.setMaxHeight(rootPane.getPrefHeight());
+			anchorPane.setMaxWidth(rootPane.getPrefWidth());*/
 			rootPane.setCenter(anchorPane);
 
 			WelcomeStageController controller = loader.getController();
@@ -109,8 +113,8 @@ public class CarDealershipHandler extends Application {
 			loader.setLocation(CarDealershipHandler.class.getResource("view/DealershipOverview.fxml"));
 		try {
 			AnchorPane anchorPane = (AnchorPane) loader.load();
-			anchorPane.setMaxHeight(rootPane.getPrefHeight());
-			anchorPane.setMaxWidth(rootPane.getPrefWidth());
+			/*anchorPane.setMaxHeight(rootPane.getPrefHeight());
+			anchorPane.setMaxWidth(rootPane.getPrefWidth());*/
 			rootPane.setCenter(anchorPane);
 
 			DealershipOverviewController controller = loader.getController();
@@ -239,8 +243,10 @@ public class CarDealershipHandler extends Application {
 
 		if (createRootDirectories())
 			showWelcomeStage();
-		else if (!(new File(PathUtil.getDealershipDir() + System.getProperty("file.separator") + "dealership.xml").exists()))
+		else if (!(new File(PathUtil.getDealershipDir() + System.getProperty("file.separator") + "dealership.xml").exists())) {
+			//carData = carDAO.getCarsForSale();
 			showWelcomeStage();
+		}
 		else {
 			initDealership();
 			showDealershipOverview();

@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -16,6 +18,8 @@ import java.time.format.DateTimeParseException;
 
 public class WelcomeStageController {
 
+	@FXML
+	private AnchorPane pane;
 	@FXML
 	private TextField dealershipNameField;
 	@FXML
@@ -29,7 +33,7 @@ public class WelcomeStageController {
 	@FXML
 	private DatePicker birthdayPicker;
 
-	private Stage stage;
+	private Pane rootPane;
 
 	private CarDealershipHandler handler;
 
@@ -38,6 +42,12 @@ public class WelcomeStageController {
 
 	@FXML
 	private void initialize() {
+		AnchorPane.setTopAnchor(pane, 0.0);
+		AnchorPane.setBottomAnchor(pane, 0.0);
+		AnchorPane.setLeftAnchor(pane, 0.0);
+		AnchorPane.setRightAnchor(pane, 0.0);
+		/*pane.prefHeightProperty().bind(rootPane.heightProperty());
+		pane.prefWidthProperty().bind(rootPane.widthProperty());*/
 	}
 
 	@FXML
@@ -109,6 +119,7 @@ public class WelcomeStageController {
 
 	public void setHandler(CarDealershipHandler handler) {
 		this.handler = handler;
+		this.rootPane = handler.getRootPane();
 	}
 
 }

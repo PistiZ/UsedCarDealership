@@ -6,11 +6,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.Optional;
 
 public class DealershipOverviewController {
 
+	@FXML
+	private AnchorPane pane;
 	@FXML
 	private Label companyNameLabel;
 	@FXML

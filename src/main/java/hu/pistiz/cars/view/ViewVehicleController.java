@@ -3,6 +3,7 @@ package hu.pistiz.cars.view;
 import hu.pistiz.cars.model.Car;
 import hu.pistiz.cars.model.CarDAO;
 import hu.pistiz.cars.model.XMLCarDAO;
+import hu.pistiz.cars.model.XMLDAOFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -41,17 +42,22 @@ public class ViewVehicleController {
 
 	private Stage dialogStage;
 	private Car car;
-	private CarDAO carDAO = new XMLCarDAO();
+	private CarDAO carDAO;
+
+	public ViewVehicleController() {
+		carDAO = XMLDAOFactory.getCarDAO();
+	}
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
+		this.dialogStage.setResizable(false);
 	}
 
 	@FXML
 	private void initialize() {
-		InputStream agera = this.getClass().getClassLoader().getResourceAsStream("agera.jpg");
+		/*InputStream agera = this.getClass().getClassLoader().getResourceAsStream("agera.jpg");
 		Image pic = new Image(agera);
-		image.setImage(pic);
+		image.setImage(pic);*/
 	}
 
 	public void setAndPrintVehicle(Car car) {

@@ -45,6 +45,7 @@ public class EditVehicleController {
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
+		this.dialogStage.setResizable(false);
 	}
 
 	public void setHandler(CarDealershipHandler handler) {
@@ -101,9 +102,10 @@ public class EditVehicleController {
 			errorMessage += "Üres évjárat-mező!\n";
 		} else {
 			try {
-				Year.parse(dateField.getText());
+				if (Year.parse(dateField.getText()).isBefore(Year.of(1950)) || Year.parse(dateField.getText()).isAfter(Year.now()))
+					errorMessage += "Nem megfelelő évjárat!\n";
 			} catch (DateTimeParseException e) {
-				errorMessage += "Nem megfelelő évjárat!\n";
+				errorMessage += "Hibás évjárat!\n";
 			}
 		}
 
