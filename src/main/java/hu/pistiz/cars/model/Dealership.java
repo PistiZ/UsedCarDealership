@@ -21,8 +21,8 @@ public class Dealership {
 
 	@XmlElement
 	private long income;
-	private List<Car> carsForSale;
-	private List<Car> soldCars;
+	//private List<Car> carsForSale;
+	//private List<Car> soldCars;
 
 	public Dealership() {
 		this(null);
@@ -34,8 +34,8 @@ public class Dealership {
 		this.companyName = null;
 		this.owner = new Person();
 		this.income = 0;
-		this.carsForSale = new ArrayList<Car>();
-		this.soldCars = new ArrayList<Car>();
+		//this.carsForSale = new ArrayList<Car>();
+		//this.soldCars = new ArrayList<Car>();
 	}
 
 	public String getName() {
@@ -70,20 +70,20 @@ public class Dealership {
 		this.owner = owner;
 	}
 
-	public List<Car> getCarsForSale() {
+	/*public List<Car> getCarsForSale() {
 		return carsForSale;
 	}
 
 	public void setCarsForSale(List<Car> carsForSale) {
 		this.carsForSale = carsForSale;
-	}
+	}*/
 
-	public List<Car> getSoldCars() {
+	/*public List<Car> getSoldCars() {
 		return soldCars;
 	}
 
 	public void setSoldCars(List<Car> soldCars) {
 		this.soldCars = soldCars;
-	}
+	}*/
 
 }

@@ -171,7 +171,6 @@ public class EditVehicleController {
 			handler.getCarDAO().updateCar(car);
 			handler.setCarData(handler.carDAO.getCarsForSale());
 
-
 			saveClicked = true;
 			dialogStage.close();
 		}

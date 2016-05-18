@@ -77,7 +77,7 @@ public class CarDealershipHandler extends Application {
 
 	public void initRootPane() {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(CarDealershipHandler.class.getResource("view/RootLayout.fxml"));
+		loader.setLocation(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
 		try {
 			rootPane = (BorderPane) loader.load();
 		} catch (IOException e) {
@@ -91,7 +91,7 @@ public class CarDealershipHandler extends Application {
 
 	public void showWelcomeStage() {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(CarDealershipHandler.class.getResource("view/WelcomeStage.fxml"));
+		loader.setLocation(getClass().getClassLoader().getResource("fxml/WelcomeStage.fxml"));
 		try {
 			AnchorPane anchorPane = (AnchorPane) loader.load();
 			/*anchorPane.setMaxHeight(rootPane.getPrefHeight());
@@ -111,7 +111,7 @@ public class CarDealershipHandler extends Application {
 
 	public void showDealershipOverview() {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(CarDealershipHandler.class.getResource("view/DealershipOverview.fxml"));
+			loader.setLocation(getClass().getClassLoader().getResource("fxml/DealershipOverview.fxml"));
 		try {
 			AnchorPane anchorPane = (AnchorPane) loader.load();
 			/*anchorPane.setMaxHeight(rootPane.getPrefHeight());
@@ -132,7 +132,7 @@ public class CarDealershipHandler extends Application {
 	public void showNewVehicleDialog() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(CarDealershipHandler.class.getResource("view/NewVehicle.fxml"));
+			loader.setLocation(getClass().getClassLoader().getResource("fxml/NewVehicle.fxml"));
 			AnchorPane anchorPane = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
@@ -159,7 +159,7 @@ public class CarDealershipHandler extends Application {
 	public void showEditVehicleDialog(Car car) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(CarDealershipHandler.class.getResource("view/EditVehicle.fxml"));
+			loader.setLocation(getClass().getClassLoader().getResource("fxml/EditVehicle.fxml"));
 			AnchorPane anchorPane = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
@@ -184,7 +184,7 @@ public class CarDealershipHandler extends Application {
 	public void showViewVehicleDialog(Car car) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(CarDealershipHandler.class.getResource("view/ViewVehicle.fxml"));
+			loader.setLocation(getClass().getClassLoader().getResource("fxml/ViewVehicle.fxml"));
 			AnchorPane anchorPane = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
@@ -208,7 +208,7 @@ public class CarDealershipHandler extends Application {
 	public void showSaleCarDialog(Car car) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(CarDealershipHandler.class.getResource("view/SoldCarView.fxml"));
+			loader.setLocation(getClass().getClassLoader().getResource("fxml/SoldCarView.fxml"));
 			BorderPane borderPane = (BorderPane) loader.load();
 
 			Stage dialogStage = new Stage();
@@ -251,8 +251,8 @@ public class CarDealershipHandler extends Application {
 	private void initDealership() {
 		try {
 			dealership = dealershipDAO.getDealership();
-			dealership.setCarsForSale(carDAO.getCarsForSale());
-			dealership.setSoldCars(carDAO.getSoldCars());
+			//dealership.setCarsForSale(carDAO.getCarsForSale());
+			//dealership.setSoldCars(carDAO.getSoldCars());
 			dealership.setOwner(personDAO.getPerson());
 			carData = carDAO.getCarsForSale();
 			carData.addListener((ListChangeListener<Car>) c -> carData = carDAO.getCarsForSale());

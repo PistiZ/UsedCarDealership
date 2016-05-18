@@ -161,7 +161,7 @@ public class NewVehicleController {
 
 			try {
 				handler.getCarDAO().addCarForSale(car);
-				handler.getDealership().getCarsForSale().add(car);
+				//handler.getDealership().getCarsForSale().add(car);
 				handler.getCarData().add(car);
 				dialogStage.close();
 			} catch (FileAlreadyExistsException e) {

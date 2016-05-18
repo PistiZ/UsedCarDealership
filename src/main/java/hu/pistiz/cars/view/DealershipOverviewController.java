@@ -90,6 +90,7 @@ public class DealershipOverviewController {
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
 				handler.getCarDAO().removeCarByLPN(carTable.getSelectionModel().getSelectedItem().getLicensePlateNumber());
+				//handler.getDealership().getCarsForSale().remove(carTable.getSelectionModel().getSelectedItem());
 				carTable.getItems().remove(selectedIndex);
 			} else {
 				alert.close();
