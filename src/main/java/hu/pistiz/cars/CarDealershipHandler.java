@@ -5,6 +5,7 @@ import hu.pistiz.cars.util.PathUtil;
 import hu.pistiz.cars.view.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.LoadException;
@@ -254,6 +255,7 @@ public class CarDealershipHandler extends Application {
 			dealership.setSoldCars(carDAO.getSoldCars());
 			dealership.setOwner(personDAO.getPerson());
 			carData = carDAO.getCarsForSale();
+			carData.addListener((ListChangeListener<Car>) c -> carData = carDAO.getCarsForSale());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

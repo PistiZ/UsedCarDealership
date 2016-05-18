@@ -12,8 +12,8 @@ import java.util.Optional;
 
 public class DealershipOverviewController {
 
-	@FXML
-	private AnchorPane pane;
+	/*@FXML
+	private AnchorPane pane;*/
 	@FXML
 	private Label companyNameLabel;
 	@FXML
@@ -111,7 +111,7 @@ public class DealershipOverviewController {
 		int selectedIndex = carTable.getSelectionModel().getSelectedIndex();
 		if (car != null) {
 			handler.showSaleCarDialog(car);
-			carTable.getItems().remove(selectedIndex);
+			carTable.setItems(handler.getCarData());
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(handler.getPrimaryStage());

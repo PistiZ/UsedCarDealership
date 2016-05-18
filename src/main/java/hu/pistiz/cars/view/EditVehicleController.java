@@ -41,6 +41,10 @@ public class EditVehicleController {
 	private Car car;
 	private boolean saveClicked = false;
 
+	public Car getCar() {
+		return car;
+	}
+
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 		this.dialogStage.setResizable(false);
@@ -166,6 +170,7 @@ public class EditVehicleController {
 
 			handler.getCarDAO().updateCar(car);
 			handler.setCarData(handler.carDAO.getCarsForSale());
+
 
 			saveClicked = true;
 			dialogStage.close();
