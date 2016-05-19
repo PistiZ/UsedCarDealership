@@ -11,6 +11,8 @@ public interface DealershipDAO {
 
 	Dealership getDealership() throws FileNotFoundException;
 
+	void updateDealership(Dealership dealership);
+
 	List<Car> getAllCars();
 
 	void addCarForSale(Car car);

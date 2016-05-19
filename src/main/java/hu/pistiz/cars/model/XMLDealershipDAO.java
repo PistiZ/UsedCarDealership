@@ -42,6 +42,34 @@ public class XMLDealershipDAO implements DealershipDAO {
 		return dealership;
 	}
 
+	@Override
+	public void updateDealership(Dealership dealership) {
+		try {
+			File dealershipFile = new File((Paths.get(dealershipDir.toString(), "dealership.xml")).toUri());
+			boolean fileCreated = false;
+			if (dealershipFile.exists()) {
+				dealershipFile.delete();
+				try {
+					fileCreated = dealershipFile.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					fileCreated = dealershipFile.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (fileCreated)
+				JAXBUtil.toXML(dealership, new FileOutputStream(dealershipFile));
+		} catch (JAXBException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/*@Override
 	public Dealership getDealershipByName(String name) throws FileNotFoundException {
 		Dealership dealership = null;

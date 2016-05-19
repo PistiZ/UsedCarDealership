@@ -8,6 +8,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.util.Optional;
 
 public class SoldCarViewController {
@@ -72,57 +73,80 @@ public class SoldCarViewController {
 
 	@FXML
 	private void handleOk() {
-		long salePrice = Long.parseLong(salePriceField.getText());
-		long purchasePrice = Long.parseLong(purchasePriceField.getText());
-		if (salePrice < purchasePrice) {
-			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-			alert.initOwner(dialogStage);
-			alert.setTitle("Veszteség keletkezett!");
-			alert.setHeaderText("Helyesek az árak?");
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK) {
-				car.setSalePrice(salePrice);
-				handler.getCarDAO().updateCar(car);
-				handler.getCarDAO().addSoldCar(car);
-				handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
-				handler.setCarData(handler.carDAO.getCarsForSale());
+		try {
+			long salePrice = Long.parseLong(salePriceField.getText());
+			long purchasePrice = Long.parseLong(purchasePriceField.getText());
+			long profit = salePrice - purchasePrice;
+			if (salePrice < purchasePrice) {
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.initOwner(dialogStage);
+				alert.setTitle("Veszteség keletkezett!");
+				alert.setHeaderText("Helyesek az árak?");
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					car.setSalePrice(salePrice);
+					handler.getCarDAO().updateCar(car);
+					handler.getCarDAO().addSoldCar(car);
+					handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
+					handler.setCarData(handler.carDAO.getCarsForSale());
+					handler.getService().incrementIncome(handler.getDealership(), salePrice);
+					handler.getService().incrementProfit(handler.getDealership(), profit);
+					handler.getDealershipDAO().updateDealership(handler.getDealership());
+					handler.setDealership(handler.dealershipDAO.getDealership());
 
-				dialogStage.close();
-			} else
-				alert.close();
-		} else if (salePrice == purchasePrice) {
-			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-			alert.initOwner(dialogStage);
-			alert.setTitle("A két ár megegyezik!");
-			alert.setHeaderText("A két ár megegyezik!");
-			alert.setContentText("Helyesek az árak?");
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK) {
-				car.setSalePrice(salePrice);
-				handler.getCarDAO().updateCar(car);
-				handler.getCarDAO().addSoldCar(car);
-				handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
-				handler.setCarData(handler.carDAO.getCarsForSale());
+					dialogStage.close();
+				} else
+					alert.close();
+			} else if (salePrice == purchasePrice) {
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.initOwner(dialogStage);
+				alert.setTitle("A két ár megegyezik!");
+				alert.setHeaderText("A két ár megegyezik!");
+				alert.setContentText("Helyesek az árak?");
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					car.setSalePrice(salePrice);
+					handler.getCarDAO().updateCar(car);
+					handler.getCarDAO().addSoldCar(car);
+					handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
+					handler.setCarData(handler.carDAO.getCarsForSale());
+					handler.getService().incrementIncome(handler.getDealership(), salePrice);
+					handler.getService().incrementProfit(handler.getDealership(), profit);
+					handler.getDealershipDAO().updateDealership(handler.getDealership());
+					handler.setDealership(handler.dealershipDAO.getDealership());
 
-				dialogStage.close();
-			} else
-				alert.close();
-		} else {
-			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-			alert.initOwner(dialogStage);
-			alert.setTitle("Megerősítés szükséges");
-			alert.setHeaderText("Biztos?");
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK) {
-				car.setSalePrice(salePrice);
-				handler.getCarDAO().updateCar(car);
-				handler.getCarDAO().addSoldCar(car);
-				handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
-				handler.setCarData(handler.carDAO.getCarsForSale());
+					dialogStage.close();
+				} else
+					alert.close();
+			} else {
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.initOwner(dialogStage);
+				alert.setTitle("Megerősítés szükséges");
+				alert.setHeaderText("Biztos?");
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					car.setSalePrice(salePrice);
+					handler.getCarDAO().updateCar(car);
+					handler.getCarDAO().addSoldCar(car);
+					handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
+					handler.setCarData(handler.carDAO.getCarsForSale());
+					handler.getService().incrementIncome(handler.getDealership(), salePrice);
+					handler.getService().incrementProfit(handler.getDealership(), profit);
+					handler.getDealershipDAO().updateDealership(handler.getDealership());
+					handler.setDealership(handler.dealershipDAO.getDealership());
 
-				dialogStage.close();
-			} else
-				alert.close();
+					dialogStage.close();
+				} else
+					alert.close();
+			}
+		} catch (NumberFormatException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.initOwner(dialogStage);
+			alert.setTitle("Hibás ár!");
+			alert.setHeaderText("Hibás ár!");
+			alert.showAndWait();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.FileNotFoundException;
 import java.util.Optional;
 
 public class DealershipOverviewController {
@@ -26,6 +27,10 @@ public class DealershipOverviewController {
 	private TableColumn<Car, String> variantColumn;
 	@FXML
 	private TableColumn<Car, String> licensePlateNumberColumn;
+	@FXML
+	private TextField incomeField;
+	@FXML
+	private TextField profitField;
 
 	private CarDealershipHandler handler;
 	//private XMLCarDAO carDAO = new XMLCarDAO();
@@ -113,6 +118,13 @@ public class DealershipOverviewController {
 		if (car != null) {
 			handler.showSaleCarDialog(car);
 			carTable.setItems(handler.getCarData());
+			/*try {
+				handler.setDealership(handler.dealershipDAO.getDealership());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}*/
+			setIncomeFieldText(handler.getDealership().getIncome());
+			setProfitFieldText(handler.getDealership().getProfit());
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(handler.getPrimaryStage());
@@ -126,6 +138,14 @@ public class DealershipOverviewController {
 
 	public void setCompanyNameLabelText(String text) {
 		companyNameLabel.setText(text);
+	}
+
+	public void setIncomeFieldText(long income) {
+		incomeField.setText(Long.toString(income));
+	}
+
+	public void setProfitFieldText(long profit) {
+		profitField.setText(Long.toString(profit));
 	}
 
 	public void setHandler(CarDealershipHandler handler) {

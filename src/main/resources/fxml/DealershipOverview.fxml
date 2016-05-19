@@ -90,17 +90,17 @@
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="Eddigi összes nyereség" GridPane.rowIndex="2">
+                        <Label text="Eddigi összes nyereség eladásokból" GridPane.columnSpan="2" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextField editable="false" GridPane.rowIndex="1">
+                        <TextField fx:id="incomeField" alignment="CENTER_RIGHT" editable="false" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField editable="false" GridPane.rowIndex="3">
+                        <TextField fx:id="profitField" alignment="CENTER_RIGHT" editable="false" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>

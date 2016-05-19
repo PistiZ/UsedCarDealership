@@ -1,9 +1,12 @@
 package hu.pistiz.cars;
 
 import hu.pistiz.cars.model.*;
+import hu.pistiz.cars.model.service.DealershipService;
 import hu.pistiz.cars.util.PathUtil;
 import hu.pistiz.cars.view.*;
 import javafx.application.Application;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.value.ObservableLongValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -27,10 +30,13 @@ public class CarDealershipHandler extends Application {
 
 	private Dealership dealership;
 	public DealershipDAO dealershipDAO;
+	public DealershipService service;
 	public CarDAO carDAO;
 	public PersonDAO personDAO;
 
 	private ObservableList<Car> carData = FXCollections.observableArrayList();
+	//private ObservableLongValue income;
+	private ObservableLongValue profit;
 
 	public CarDealershipHandler() {
 		dealership = new Dealership();
@@ -49,6 +55,10 @@ public class CarDealershipHandler extends Application {
 
 	public Dealership getDealership() {
 		return dealership;
+	}
+
+	public DealershipService getService() {
+		return service;
 	}
 
 	public DealershipDAO getDealershipDAO() {
@@ -73,6 +83,22 @@ public class CarDealershipHandler extends Application {
 
 	public void setDealership(Dealership dealership) {
 		this.dealership = dealership;
+	}
+
+	/*public Number getIncome() {
+		return income.get();
+	}
+
+	public ObservableLongValue incomeProperty() {
+		return income;
+	}*/
+
+	public Number getProfit() {
+		return profit.get();
+	}
+
+	public ObservableLongValue profitProperty() {
+		return profit;
 	}
 
 	public void initRootPane() {
@@ -121,6 +147,8 @@ public class CarDealershipHandler extends Application {
 			DealershipOverviewController controller = loader.getController();
 			controller.setHandler(this);
 			controller.setCompanyNameLabelText(getDealership().getName());
+			controller.setIncomeFieldText(getDealership().getIncome());
+			controller.setProfitFieldText(getDealership().getProfit());
 		} catch (LoadException e) {
 			System.out.println("DealershipOverview.fxml betöltése sikertelen!");
 			e.printStackTrace();
@@ -251,9 +279,10 @@ public class CarDealershipHandler extends Application {
 	private void initDealership() {
 		try {
 			dealership = dealershipDAO.getDealership();
-			//dealership.setCarsForSale(carDAO.getCarsForSale());
-			//dealership.setSoldCars(carDAO.getSoldCars());
 			dealership.setOwner(personDAO.getPerson());
+			//income = new SimpleLongProperty(dealership.getIncome());
+			profit = new SimpleLongProperty(dealership.getProfit());
+			service = new DealershipService();
 			carData = carDAO.getCarsForSale();
 			carData.addListener((ListChangeListener<Car>) c -> carData = carDAO.getCarsForSale());
 		} catch (FileNotFoundException e) {
