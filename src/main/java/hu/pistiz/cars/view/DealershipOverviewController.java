@@ -33,6 +33,8 @@ public class DealershipOverviewController {
 	private TextField profitField;
 	@FXML
 	private TextField soldCarsField;
+	@FXML
+	private TextField remainderField;
 
 	private CarDealershipHandler handler;
 	//private XMLCarDAO carDAO = new XMLCarDAO();
@@ -131,6 +133,7 @@ public class DealershipOverviewController {
 			setIncomeFieldText(handler.getDealership().getIncome());
 			setProfitFieldText(handler.getDealership().getProfit());
 			setSoldCarsFieldText(handler.getDealership().getSoldCars());
+			setRemainderFieldText(handler.getDealership().getRemainder());
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(handler.getPrimaryStage());
@@ -156,6 +159,10 @@ public class DealershipOverviewController {
 
 	public void setSoldCarsFieldText(long soldCars) {
 		soldCarsField.setText(Long.toString(soldCars));
+	}
+
+	public void setRemainderFieldText(long remainder) {
+		remainderField.setText(Long.toString(remainder));
 	}
 
 	public void setHandler(CarDealershipHandler handler) {

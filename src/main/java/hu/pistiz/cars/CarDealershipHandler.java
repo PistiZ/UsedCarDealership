@@ -41,6 +41,7 @@ public class CarDealershipHandler extends Application {
 		dealershipDAO = XMLDAOFactory.getDealershipDAO();
 		carDAO = XMLDAOFactory.getCarDAO();
 		personDAO = XMLDAOFactory.getPersonDAO();
+		service = new DealershipService();
 	}
 
 	public Stage getPrimaryStage() {
@@ -148,6 +149,7 @@ public class CarDealershipHandler extends Application {
 			controller.setIncomeFieldText(getDealership().getIncome());
 			controller.setProfitFieldText(getDealership().getProfit());
 			controller.setSoldCarsFieldText(getDealership().getSoldCars());
+			controller.setRemainderFieldText(getDealership().getRemainder());
 		} catch (LoadException e) {
 			System.out.println("DealershipOverview.fxml betöltése sikertelen!");
 			e.printStackTrace();
@@ -281,7 +283,6 @@ public class CarDealershipHandler extends Application {
 			dealership.setOwner(personDAO.getPerson());
 			//income = new SimpleLongProperty(dealership.getIncome());
 			//profit = new SimpleLongProperty(dealership.getProfit());
-			service = new DealershipService();
 			carData = carDAO.getCarsForSale();
 			carData.addListener((ListChangeListener<Car>) c -> carData = carDAO.getCarsForSale());
 		} catch (FileNotFoundException e) {

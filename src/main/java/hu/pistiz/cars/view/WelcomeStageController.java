@@ -27,6 +27,8 @@ public class WelcomeStageController {
 	@FXML
 	private TextField dealershipAddressField;
 	@FXML
+	private TextField startingMoneyField;
+	@FXML
 	private TextField ownerLastNameField;
 	@FXML
 	private TextField ownerFirstNameField;
@@ -57,6 +59,10 @@ public class WelcomeStageController {
 			dealership.setName(dealershipNameField.getText());
 			dealership.setCompanyName(dealershipCompanyField.getText());
 			dealership.setAddress(dealershipAddressField.getText());
+			handler.getService().incrementStartingMoney(dealership, Long.parseLong(startingMoneyField.getText()));
+			handler.getService().incrementRemainder(dealership, Long.parseLong(startingMoneyField.getText()));
+			//dealership.setStartingMoney(Long.parseLong(startingMoneyField.getText()));
+
 			dealership.getOwner().setLastName(ownerLastNameField.getText());
 			dealership.getOwner().setFirstName(ownerFirstNameField.getText());
 			dealership.getOwner().setDateOfBirth(birthdayPicker.getValue());
@@ -81,6 +87,16 @@ public class WelcomeStageController {
 
 		if (dealershipAddressField.getText() == null || dealershipAddressField.getText().length() == 0 || dealershipAddressField.getText().trim().length() == 0) {
 			errorMessage += "Üres székhely-mező!\n";
+		}
+
+		if (startingMoneyField.getText() == null || startingMoneyField.getText().length() == 0 || dealershipAddressField.getText().trim().length() == 0) {
+			errorMessage += "Üres induló tőke mező!\n";
+		} else {
+			try {
+				Long.parseLong(startingMoneyField.getText());
+			} catch (NumberFormatException e) {
+				errorMessage += "Nem megfelelő induló tőke!\n";
+			}
 		}
 
 		if (ownerLastNameField.getText() == null || ownerLastNameField.getText().length() == 0 || ownerLastNameField.getText().trim().length() == 0) {

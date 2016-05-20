@@ -19,12 +19,16 @@ public class Dealership {
 	private String companyName;
 	private Person owner;
 
-	@XmlElement(name = "income")
+	@XmlElement
+	private long startingMoney;
+	@XmlElement
 	private long income;
-	@XmlElement(name = "profit")
+	@XmlElement
 	private long profit;
 	@XmlElement
 	private long soldCars;
+	@XmlElement
+	private long remainder;
 
 	//private List<Car> carsForSale;
 	//private List<Car> soldCars;
@@ -38,9 +42,11 @@ public class Dealership {
 		this.address = null;
 		this.companyName = null;
 		this.owner = new Person();
+		this.startingMoney = 0;
 		this.income = 0;
 		this.profit = 0;
 		this.soldCars = 0;
+		this.remainder = 0;
 		//this.carsForSale = new ArrayList<Car>();
 		//this.soldCars = new ArrayList<Car>();
 	}
@@ -77,6 +83,14 @@ public class Dealership {
 		this.owner = owner;
 	}
 
+	public long getStartingMoney() {
+		return startingMoney;
+	}
+
+	public void setStartingMoney(long startingMoney) {
+		this.startingMoney = startingMoney;
+	}
+
 	public long getIncome() {
 		return income;
 	}
@@ -97,12 +111,32 @@ public class Dealership {
 		return soldCars;
 	}
 
+	public long getRemainder() {
+		return remainder;
+	}
+
+	public void setRemainder(long remainder) {
+		this.remainder = remainder;
+	}
+
 	public void incrementIncome(long increment) {
 		this.income += increment;
 	}
 
 	public void incrementProfit(long increment) {
 		this.profit += increment;
+	}
+
+	public void incrementRemainder(long increment) {
+		this.remainder += increment;
+	}
+
+	public void incrementStartingMoney(long increment) {
+		this.startingMoney += increment;
+	}
+
+	public void decreaseRemainder(long decrease) {
+		this.remainder -= decrease;
 	}
 
 	public void saleCar() {
