@@ -31,6 +31,8 @@ public class DealershipOverviewController {
 	private TextField incomeField;
 	@FXML
 	private TextField profitField;
+	@FXML
+	private TextField soldCarsField;
 
 	private CarDealershipHandler handler;
 	//private XMLCarDAO carDAO = new XMLCarDAO();
@@ -49,6 +51,7 @@ public class DealershipOverviewController {
 	@FXML
 	private void handleNewCar() {
 		handler.showNewVehicleDialog();
+		carTable.setItems(handler.getCarData());
 	}
 
 	@FXML
@@ -96,7 +99,9 @@ public class DealershipOverviewController {
 			if (result.get() == ButtonType.OK) {
 				handler.getCarDAO().removeCarByLPN(carTable.getSelectionModel().getSelectedItem().getLicensePlateNumber());
 				//handler.getDealership().getCarsForSale().remove(carTable.getSelectionModel().getSelectedItem());
-				carTable.getItems().remove(selectedIndex);
+				//carTable.getItems().remove(selectedIndex);
+				handler.setCarData(handler.carDAO.getCarsForSale());
+				carTable.setItems(handler.getCarData());
 			} else {
 				alert.close();
 			}
@@ -125,6 +130,7 @@ public class DealershipOverviewController {
 			}*/
 			setIncomeFieldText(handler.getDealership().getIncome());
 			setProfitFieldText(handler.getDealership().getProfit());
+			setSoldCarsFieldText(handler.getDealership().getSoldCars());
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(handler.getPrimaryStage());
@@ -146,6 +152,10 @@ public class DealershipOverviewController {
 
 	public void setProfitFieldText(long profit) {
 		profitField.setText(Long.toString(profit));
+	}
+
+	public void setSoldCarsFieldText(long soldCars) {
+		soldCarsField.setText(Long.toString(soldCars));
 	}
 
 	public void setHandler(CarDealershipHandler handler) {

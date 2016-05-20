@@ -5,8 +5,6 @@ import hu.pistiz.cars.model.service.DealershipService;
 import hu.pistiz.cars.util.PathUtil;
 import hu.pistiz.cars.view.*;
 import javafx.application.Application;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.value.ObservableLongValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -36,7 +34,7 @@ public class CarDealershipHandler extends Application {
 
 	private ObservableList<Car> carData = FXCollections.observableArrayList();
 	//private ObservableLongValue income;
-	private ObservableLongValue profit;
+	//private ObservableLongValue profit;
 
 	public CarDealershipHandler() {
 		dealership = new Dealership();
@@ -93,13 +91,13 @@ public class CarDealershipHandler extends Application {
 		return income;
 	}*/
 
-	public Number getProfit() {
+	/*public Number getProfit() {
 		return profit.get();
 	}
 
 	public ObservableLongValue profitProperty() {
 		return profit;
-	}
+	}*/
 
 	public void initRootPane() {
 		FXMLLoader loader = new FXMLLoader();
@@ -149,6 +147,7 @@ public class CarDealershipHandler extends Application {
 			controller.setCompanyNameLabelText(getDealership().getName());
 			controller.setIncomeFieldText(getDealership().getIncome());
 			controller.setProfitFieldText(getDealership().getProfit());
+			controller.setSoldCarsFieldText(getDealership().getSoldCars());
 		} catch (LoadException e) {
 			System.out.println("DealershipOverview.fxml betöltése sikertelen!");
 			e.printStackTrace();
@@ -281,7 +280,7 @@ public class CarDealershipHandler extends Application {
 			dealership = dealershipDAO.getDealership();
 			dealership.setOwner(personDAO.getPerson());
 			//income = new SimpleLongProperty(dealership.getIncome());
-			profit = new SimpleLongProperty(dealership.getProfit());
+			//profit = new SimpleLongProperty(dealership.getProfit());
 			service = new DealershipService();
 			carData = carDAO.getCarsForSale();
 			carData.addListener((ListChangeListener<Car>) c -> carData = carDAO.getCarsForSale());

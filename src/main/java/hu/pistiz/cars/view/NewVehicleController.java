@@ -151,7 +151,7 @@ public class NewVehicleController {
 			car.setBrand(brandField.getText());
 			car.setModel(modelField.getText());
 			car.setVariant(variantField.getText());
-			car.setLicensePlateNumber(licensePlateNumberField.getText());
+			car.setLicensePlateNumber(licensePlateNumberField.getText().toUpperCase());
 			car.setDate(Year.parse(dateField.getText()));
 			car.setPurchasePrice(Long.parseLong(purchasePriceField.getText()));
 			car.setKm(Long.parseLong(kmField.getText()));

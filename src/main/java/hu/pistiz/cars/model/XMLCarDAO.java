@@ -31,8 +31,8 @@ public class XMLCarDAO implements CarDAO {
 	@Override
 	public void addCarForSale(Car car) throws FileAlreadyExistsException {
 		try {
-			File carForSaleFile = new File((Paths.get(carsForSaleDir.toString(), car.getLicensePlateNumber() + ".xml")).toUri());
-			File soldCarFile = new File((Paths.get(soldCarsDir.toString(), car.getLicensePlateNumber() + ".xml")).toUri());
+			File carForSaleFile = new File((Paths.get(carsForSaleDir.toString(), car.getLicensePlateNumber().toUpperCase() + ".xml")).toUri());
+			File soldCarFile = new File((Paths.get(soldCarsDir.toString(), car.getLicensePlateNumber().toUpperCase() + ".xml")).toUri());
 			boolean fileCreated = false;
 			if (carForSaleFile.exists())
 				throw new FileAlreadyExistsException("Már fel lett véve eladó autóként!");

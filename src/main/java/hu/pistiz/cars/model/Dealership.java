@@ -23,6 +23,9 @@ public class Dealership {
 	private long income;
 	@XmlElement(name = "profit")
 	private long profit;
+	@XmlElement
+	private long soldCars;
+
 	//private List<Car> carsForSale;
 	//private List<Car> soldCars;
 
@@ -37,6 +40,7 @@ public class Dealership {
 		this.owner = new Person();
 		this.income = 0;
 		this.profit = 0;
+		this.soldCars = 0;
 		//this.carsForSale = new ArrayList<Car>();
 		//this.soldCars = new ArrayList<Car>();
 	}
@@ -89,12 +93,20 @@ public class Dealership {
 		this.profit = profit;
 	}
 
+	public long getSoldCars() {
+		return soldCars;
+	}
+
 	public void incrementIncome(long increment) {
 		this.income += increment;
 	}
 
 	public void incrementProfit(long increment) {
 		this.profit += increment;
+	}
+
+	public void saleCar() {
+		this.soldCars += 1;
 	}
 
 	/*public List<Car> getCarsForSale() {

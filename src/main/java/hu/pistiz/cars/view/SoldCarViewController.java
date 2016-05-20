@@ -91,6 +91,7 @@ public class SoldCarViewController {
 					handler.setCarData(handler.carDAO.getCarsForSale());
 					handler.getService().incrementIncome(handler.getDealership(), salePrice);
 					handler.getService().incrementProfit(handler.getDealership(), profit);
+					handler.getService().saleCar(handler.getDealership());
 					handler.getDealershipDAO().updateDealership(handler.getDealership());
 					handler.setDealership(handler.dealershipDAO.getDealership());
 
@@ -112,6 +113,7 @@ public class SoldCarViewController {
 					handler.setCarData(handler.carDAO.getCarsForSale());
 					handler.getService().incrementIncome(handler.getDealership(), salePrice);
 					handler.getService().incrementProfit(handler.getDealership(), profit);
+					handler.getService().saleCar(handler.getDealership());
 					handler.getDealershipDAO().updateDealership(handler.getDealership());
 					handler.setDealership(handler.dealershipDAO.getDealership());
 
@@ -132,6 +134,7 @@ public class SoldCarViewController {
 					handler.setCarData(handler.carDAO.getCarsForSale());
 					handler.getService().incrementIncome(handler.getDealership(), salePrice);
 					handler.getService().incrementProfit(handler.getDealership(), profit);
+					handler.getService().saleCar(handler.getDealership());
 					handler.getDealershipDAO().updateDealership(handler.getDealership());
 					handler.setDealership(handler.dealershipDAO.getDealership());
 
