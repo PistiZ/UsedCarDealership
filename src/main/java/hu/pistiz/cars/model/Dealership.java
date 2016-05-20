@@ -111,6 +111,10 @@ public class Dealership {
 		return soldCars;
 	}
 
+	public void setSoldCars(long soldCars) {
+		this.soldCars = soldCars;
+	}
+
 	public long getRemainder() {
 		return remainder;
 	}
