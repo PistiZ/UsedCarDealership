@@ -52,6 +52,7 @@ public class DealershipOverviewController {
 	private void handleNewCar() {
 		handler.showNewVehicleDialog();
 		carTable.setItems(handler.getCarData());
+		setRemainderFieldText(handler.getDealership().getRemainder());
 	}
 
 	@FXML
@@ -76,6 +77,7 @@ public class DealershipOverviewController {
 		if (car != null) {
 			handler.showEditVehicleDialog(car);
 			carTable.setItems(handler.getCarData());
+			setRemainderFieldText(handler.getDealership().getRemainder());
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(handler.getPrimaryStage());

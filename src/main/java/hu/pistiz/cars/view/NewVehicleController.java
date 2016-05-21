@@ -163,6 +163,8 @@ public class NewVehicleController {
 				handler.getCarDAO().newCar(car);
 				//handler.getDealership().getCarsForSale().add(car);
 				handler.getCarData().add(car);
+				handler.getDealershipService().decreaseRemainder(handler.getDealership(), car.getPurchasePrice());
+				handler.getDealershipDAO().updateDealership(handler.getDealership());
 				dialogStage.close();
 			} catch (FileAlreadyExistsException e) {
 				Alert alert = new Alert(AlertType.ERROR);

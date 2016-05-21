@@ -157,6 +157,8 @@ public class EditVehicleController {
 	@FXML
 	private void handleSave() {
 		if (isInputValid()) {
+			long oldPrice = car.getPurchasePrice();
+
 			car.setBrand(brandField.getText());
 			car.setModel(modelField.getText());
 			car.setVariant(variantField.getText());
@@ -170,6 +172,13 @@ public class EditVehicleController {
 
 			handler.getCarDAO().updateCar(car);
 			handler.setCarData(handler.carDAO.getCarsForSale());
+			if (car.getPurchasePrice() > oldPrice) {
+				handler.getDealershipService().decreaseRemainder(handler.getDealership(), car.getPurchasePrice() - oldPrice);
+				handler.getDealershipDAO().updateDealership(handler.getDealership());
+			} else if (car.getPurchasePrice() < oldPrice) {
+				handler.getDealershipService().incrementRemainder(handler.getDealership(), oldPrice - car.getPurchasePrice());
+				handler.getDealershipDAO().updateDealership(handler.getDealership());
+			}
 
 			saveClicked = true;
 			dialogStage.close();
