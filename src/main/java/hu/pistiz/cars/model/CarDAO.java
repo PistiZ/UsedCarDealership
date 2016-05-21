@@ -3,23 +3,30 @@ package hu.pistiz.cars.model;
 import javafx.collections.ObservableList;
 
 import java.nio.file.FileAlreadyExistsException;
+import java.util.List;
 
 public interface CarDAO {
 
-	String priceToString(long price);
+	void newCar(Car car) throws FileAlreadyExistsException;
 
-	String kmToString(long km);
-
-	void addCarForSale(Car car) throws FileAlreadyExistsException;
+	void addCarForSale(Car car);
 
 	void addSoldCar(Car car);
+
+	//boolean findIfSoldCarPresents(String licensePlateNumber);
+
+	Car getSoldCarByLPN(String licensePlateNumber);
 
 	ObservableList<Car> getCarsForSale();
 
 	ObservableList<Car> getSoldCars();
 
+	List<String> getSoldCarsList();
+
 	void updateCar(Car car);
 
-	void removeCarByLPN(String licensePlateNumber);
+	void removeCarForSale(String licensePlateNumber);
+
+	void removeSoldCar(String licensePlateNumber);
 
 }

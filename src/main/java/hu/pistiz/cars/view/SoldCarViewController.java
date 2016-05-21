@@ -87,12 +87,12 @@ public class SoldCarViewController {
 					car.setSalePrice(salePrice);
 					handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
-					handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
+					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());
-					handler.getService().incrementIncome(handler.getDealership(), salePrice);
-					handler.getService().incrementProfit(handler.getDealership(), profit);
-					handler.getService().incrementRemainder(handler.getDealership(), salePrice);
-					handler.getService().saleCar(handler.getDealership());
+					handler.getDealershipService().incrementIncome(handler.getDealership(), salePrice);
+					handler.getDealershipService().incrementProfit(handler.getDealership(), profit);
+					handler.getDealershipService().incrementRemainder(handler.getDealership(), salePrice);
+					handler.getDealershipService().saleCar(handler.getDealership());
 					handler.getDealershipDAO().updateDealership(handler.getDealership());
 					handler.setDealership(handler.dealershipDAO.getDealership());
 
@@ -110,12 +110,12 @@ public class SoldCarViewController {
 					car.setSalePrice(salePrice);
 					handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
-					handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
+					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());
-					handler.getService().incrementIncome(handler.getDealership(), salePrice);
-					handler.getService().incrementProfit(handler.getDealership(), profit);
-					handler.getService().incrementRemainder(handler.getDealership(), salePrice);
-					handler.getService().saleCar(handler.getDealership());
+					handler.getDealershipService().incrementIncome(handler.getDealership(), salePrice);
+					handler.getDealershipService().incrementProfit(handler.getDealership(), profit);
+					handler.getDealershipService().incrementRemainder(handler.getDealership(), salePrice);
+					handler.getDealershipService().saleCar(handler.getDealership());
 					handler.getDealershipDAO().updateDealership(handler.getDealership());
 					handler.setDealership(handler.dealershipDAO.getDealership());
 
@@ -132,12 +132,12 @@ public class SoldCarViewController {
 					car.setSalePrice(salePrice);
 					handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
-					handler.getCarDAO().removeCarByLPN(car.getLicensePlateNumber());
+					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());
-					handler.getService().incrementIncome(handler.getDealership(), salePrice);
-					handler.getService().incrementProfit(handler.getDealership(), profit);
-					handler.getService().incrementRemainder(handler.getDealership(), salePrice);
-					handler.getService().saleCar(handler.getDealership());
+					handler.getDealershipService().incrementIncome(handler.getDealership(), salePrice);
+					handler.getDealershipService().incrementProfit(handler.getDealership(), profit);
+					handler.getDealershipService().incrementRemainder(handler.getDealership(), salePrice);
+					handler.getDealershipService().saleCar(handler.getDealership());
 					handler.getDealershipDAO().updateDealership(handler.getDealership());
 					handler.setDealership(handler.dealershipDAO.getDealership());
 

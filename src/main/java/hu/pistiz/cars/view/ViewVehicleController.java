@@ -1,17 +1,12 @@
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.model.Car;
-import hu.pistiz.cars.model.CarDAO;
-import hu.pistiz.cars.model.XMLCarDAO;
-import hu.pistiz.cars.model.XMLDAOFactory;
+import hu.pistiz.cars.model.service.CarService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
-import java.io.InputStream;
 
 public class ViewVehicleController {
 
@@ -39,11 +34,10 @@ public class ViewVehicleController {
 	private ImageView image;
 
 	private Stage dialogStage;
-	private Car car;
-	private CarDAO carDAO;
+	private CarService service;
 
 	public ViewVehicleController() {
-		carDAO = XMLDAOFactory.getCarDAO();
+		service = new CarService();
 	}
 
 	public void setDialogStage(Stage dialogStage) {
@@ -59,7 +53,6 @@ public class ViewVehicleController {
 	}
 
 	public void setAndPrintVehicle(Car car) {
-		this.car = car;
 
 		if (car != null) {
 			brandLabel.setText(car.getBrand());
@@ -67,8 +60,8 @@ public class ViewVehicleController {
 			variantLabel.setText(car.getVariant());
 			licensePlateNumberLabel.setText(car.getLicensePlateNumber());
 			dateLabel.setText(car.getDate().toString());
-			purchasePriceLabel.setText(carDAO.priceToString(car.getPurchasePrice()));
-			kmLabel.setText(carDAO.kmToString(car.getKm()));
+			purchasePriceLabel.setText(service.priceToString(car.getPurchasePrice()));
+			kmLabel.setText(service.kmToString(car.getKm()));
 			fuelLabel.setText(car.getFuel().toString());
 			conditionLabel.setText(car.getCondition().toString());
 			descriptionArea.setText(car.getDescription());

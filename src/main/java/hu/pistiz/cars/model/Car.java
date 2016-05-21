@@ -35,8 +35,6 @@ public class Car {
 	@XmlElement
 	private String description;
 
-	private Dealership dealership;
-
 	public Car() {
 		this(null, null);
 	}
@@ -48,7 +46,7 @@ public class Car {
 	public Car(String brand, String model) {
 		this.brand = brand;
 		this.model = model;
-		this.licensePlateNumber = "ASD-123";
+		//this.licensePlateNumber = "ASD-123";
 
 		/*this.variant = new SimpleStringProperty("");
 		this.date = new SimpleObjectProperty<>(Year.of(2016));
@@ -280,12 +278,4 @@ public class Car {
 	public void setDescription(String description) {
 		this.description.set(description);
 	}*/
-
-	public Dealership getDealership() {
-		return dealership;
-	}
-
-	public void setDealership(Dealership dealership) {
-		this.dealership = dealership;
-	}
 }

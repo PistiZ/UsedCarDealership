@@ -8,28 +8,18 @@ import javafx.collections.ObservableList;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 public class XMLCarDAO implements CarDAO {
 
-	Path carsForSaleDir = PathUtil.getCarsForSaleDir();
-	Path soldCarsDir = PathUtil.getSoldCarsDir();
+	public Path carsForSaleDir = PathUtil.getCarsForSaleDir();
+	public Path soldCarsDir = PathUtil.getSoldCarsDir();
 
 	@Override
-	public String priceToString(long price) {
-		return Long.toString(price) + " Ft";
-	}
-
-	@Override
-	public String kmToString(long km) {
-		return Long.toString(km) + " km";
-	}
-
-	@Override
-	public void addCarForSale(Car car) throws FileAlreadyExistsException {
+	public void newCar(Car car) throws FileAlreadyExistsException {
 		try {
 			File carForSaleFile = new File((Paths.get(carsForSaleDir.toString(), car.getLicensePlateNumber().toUpperCase() + ".xml")).toUri());
 			File soldCarFile = new File((Paths.get(soldCarsDir.toString(), car.getLicensePlateNumber().toUpperCase() + ".xml")).toUri());
@@ -53,6 +43,24 @@ public class XMLCarDAO implements CarDAO {
 	}
 
 	@Override
+	public void addCarForSale(Car car) {
+		try {
+			File carFile = new File((Paths.get(carsForSaleDir.toString(), car.getLicensePlateNumber() + ".xml")).toUri());
+			boolean fileCreated = false;
+			try {
+				fileCreated = carFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			if (fileCreated)
+				JAXBUtil.toXML(car, new FileOutputStream(carFile));
+		} catch (JAXBException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public void addSoldCar(Car car) {
 		try {
 			File carFile = new File((Paths.get(soldCarsDir.toString(), car.getLicensePlateNumber() + ".xml")).toUri());
@@ -68,6 +76,24 @@ public class XMLCarDAO implements CarDAO {
 		} catch (JAXBException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/*@Override
+	public boolean findIfSoldCarPresents(String licensePlateNumber) {
+		File carFile = new File((Paths.get(soldCarsDir.toString(), licensePlateNumber + ".xml").toUri()));
+		return carFile.exists();
+	}*/
+
+	@Override
+	public Car getSoldCarByLPN(String licensePlateNumber) {
+		Car car = new Car();
+		File carFile = new File((Paths.get(soldCarsDir.toString(), licensePlateNumber + ".xml").toUri()));
+		try {
+			car = JAXBUtil.fromXML(Car.class,  new FileInputStream(carFile));
+		} catch (JAXBException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return car;
 	}
 
 	@Override
@@ -103,6 +129,12 @@ public class XMLCarDAO implements CarDAO {
 	}
 
 	@Override
+	public List<String> getSoldCarsList() {
+		File carFile = new File((Paths.get(soldCarsDir.toString()).toUri()));
+		return Arrays.asList(carFile.list());
+	}
+
+	@Override
 	public void updateCar(Car car) {
 		try {
 			File carFile = new File((Paths.get(carsForSaleDir.toString(), car.getLicensePlateNumber() + ".xml")).toUri());
@@ -131,8 +163,15 @@ public class XMLCarDAO implements CarDAO {
 	}
 
 	@Override
-	public void removeCarByLPN(String licensePlateNumber) {
+	public void removeCarForSale(String licensePlateNumber) {
 		File carFile = new File((Paths.get(carsForSaleDir.toString(), licensePlateNumber + ".xml")).toUri());
+		if (carFile.exists())
+			carFile.delete();
+	}
+
+	@Override
+	public void removeSoldCar(String licensePlateNumber) {
+		File carFile = new File((Paths.get(soldCarsDir.toString(), licensePlateNumber + ".xml")).toUri());
 		if (carFile.exists())
 			carFile.delete();
 	}

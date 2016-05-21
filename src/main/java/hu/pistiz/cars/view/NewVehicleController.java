@@ -160,7 +160,7 @@ public class NewVehicleController {
 			car.setDescription(descriptionArea.getText());
 
 			try {
-				handler.getCarDAO().addCarForSale(car);
+				handler.getCarDAO().newCar(car);
 				//handler.getDealership().getCarsForSale().add(car);
 				handler.getCarData().add(car);
 				dialogStage.close();

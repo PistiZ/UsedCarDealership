@@ -35,12 +35,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="35.0" prefHeight="55.0" prefWidth="235.0" text="Lehetőségek" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="35.0" prefHeight="55.0" prefWidth="235.0" text="Lehetőségek" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <VBox alignment="CENTER" layoutX="14.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" spacing="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                  <VBox alignment="CENTER" layoutX="12.0" layoutY="100.0" prefHeight="231.0" prefWidth="255.0" spacing="5.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="8.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#handleNewCar" prefWidth="185.0" text="Új jármű felvétele...">
                            <font>
@@ -62,14 +62,19 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleSaleCar" prefWidth="185.0" text="Eladva">
+                        <Button mnemonicParsing="false" onAction="#handleSaleCar" prefWidth="185.0" text="Eladva...">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleBuyBack" prefWidth="185.0" text="Visszavásárlás...">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
                      </children>
                   </VBox>
-                  <Label fx:id="companyNameLabel" alignment="CENTER" layoutX="120.0" layoutY="23.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                  <Label fx:id="companyNameLabel" alignment="CENTER" layoutX="120.0" layoutY="23.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font name="System Italic" size="16.0" />
                      </font></Label>

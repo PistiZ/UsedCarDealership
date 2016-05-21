@@ -17,7 +17,7 @@ public class DealershipServiceTest {
 	@Before
 	public void setUp() {
 		if (service == null)
-			Assert.fail("The service become unavailable before the test");
+			Assert.fail("The dealershipService become unavailable before the test");
 	}
 
 	@After

@@ -143,14 +143,11 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <version>2.7</version>
                 <configuration>
+                    <check>
+                        <haltOnFailure>false</haltOnFailure>
+                    </check>
                     <instrumentation>
                         <ignoreTrivial>true</ignoreTrivial>
-                        <!--<ignoreMethodAnnotations>
-                            <ignoreMethodAnnotation>hu.pistiz.cars.util.CoverageIgnore</ignoreMethodAnnotation>
-                        </ignoreMethodAnnotations>
-                        <excludes>
-                            <exclude>hu/pistiz/cars/util/**/*.class</exclude>
-                        </excludes>-->
                     </instrumentation>
                 </configuration>
             </plugin>

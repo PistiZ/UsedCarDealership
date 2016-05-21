@@ -6,9 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 
-import java.io.FileNotFoundException;
 import java.util.Optional;
 
 public class DealershipOverviewController {
@@ -99,7 +97,7 @@ public class DealershipOverviewController {
 			alert.setHeaderText("Biztosan törlöd a kiválaszott járművet?");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
-				handler.getCarDAO().removeCarByLPN(carTable.getSelectionModel().getSelectedItem().getLicensePlateNumber());
+				handler.getCarDAO().removeCarForSale(carTable.getSelectionModel().getSelectedItem().getLicensePlateNumber());
 				//handler.getDealership().getCarsForSale().remove(carTable.getSelectionModel().getSelectedItem());
 				//carTable.getItems().remove(selectedIndex);
 				handler.setCarData(handler.carDAO.getCarsForSale());
@@ -143,6 +141,13 @@ public class DealershipOverviewController {
 
 			alert.showAndWait();
 		}
+	}
+
+	@FXML
+	private void handleBuyBack() {
+		handler.showBuyBackCarDialog();
+		carTable.setItems(handler.getCarData());
+		setRemainderFieldText(handler.getDealership().getRemainder());
 	}
 
 	public void setCompanyNameLabelText(String text) {

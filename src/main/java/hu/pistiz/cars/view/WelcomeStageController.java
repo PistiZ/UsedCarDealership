@@ -2,18 +2,14 @@ package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.CarDealershipHandler;
 import hu.pistiz.cars.model.Dealership;
-import hu.pistiz.cars.model.DealershipDAO;
-import hu.pistiz.cars.util.LicensePlateNumberUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
-import java.time.Year;
 import java.time.format.DateTimeParseException;
 
 public class WelcomeStageController {
@@ -59,8 +55,8 @@ public class WelcomeStageController {
 			dealership.setName(dealershipNameField.getText());
 			dealership.setCompanyName(dealershipCompanyField.getText());
 			dealership.setAddress(dealershipAddressField.getText());
-			handler.getService().incrementStartingMoney(dealership, Long.parseLong(startingMoneyField.getText()));
-			handler.getService().incrementRemainder(dealership, Long.parseLong(startingMoneyField.getText()));
+			handler.getDealershipService().incrementStartingMoney(dealership, Long.parseLong(startingMoneyField.getText()));
+			handler.getDealershipService().incrementRemainder(dealership, Long.parseLong(startingMoneyField.getText()));
 			//dealership.setStartingMoney(Long.parseLong(startingMoneyField.getText()));
 
 			dealership.getOwner().setLastName(ownerLastNameField.getText());

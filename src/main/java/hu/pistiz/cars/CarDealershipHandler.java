@@ -1,6 +1,7 @@
 package hu.pistiz.cars;
 
 import hu.pistiz.cars.model.*;
+import hu.pistiz.cars.model.service.CarService;
 import hu.pistiz.cars.model.service.DealershipService;
 import hu.pistiz.cars.util.PathUtil;
 import hu.pistiz.cars.view.*;
@@ -28,7 +29,8 @@ public class CarDealershipHandler extends Application {
 
 	private Dealership dealership;
 	public DealershipDAO dealershipDAO;
-	public DealershipService service;
+	public DealershipService dealershipService;
+	public CarService carService;
 	public CarDAO carDAO;
 	public PersonDAO personDAO;
 
@@ -41,7 +43,8 @@ public class CarDealershipHandler extends Application {
 		dealershipDAO = XMLDAOFactory.getDealershipDAO();
 		carDAO = XMLDAOFactory.getCarDAO();
 		personDAO = XMLDAOFactory.getPersonDAO();
-		service = new DealershipService();
+		dealershipService = new DealershipService();
+		carService = new CarService();
 	}
 
 	public Stage getPrimaryStage() {
@@ -56,8 +59,12 @@ public class CarDealershipHandler extends Application {
 		return dealership;
 	}
 
-	public DealershipService getService() {
-		return service;
+	public DealershipService getDealershipService() {
+		return dealershipService;
+	}
+
+	public CarService getCarService() {
+		return carService;
 	}
 
 	public DealershipDAO getDealershipDAO() {
@@ -251,6 +258,30 @@ public class CarDealershipHandler extends Application {
 			controller.setDialogStage(dialogStage);
 			controller.setHandler(this);
 			controller.setAndPrintCar(car);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void showBuyBackCarDialog() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getClassLoader().getResource("fxml/BuyBackCar.fxml"));
+			AnchorPane anchorPane = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.initOwner(primaryStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.setTitle("Autó visszavásárlása");
+			Scene scene = new Scene(anchorPane);
+			dialogStage.setScene(scene);
+
+			BuyBackCarController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setHandler(this);
 
 			dialogStage.showAndWait();
 
