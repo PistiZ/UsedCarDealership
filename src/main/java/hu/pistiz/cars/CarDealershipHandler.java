@@ -16,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,6 +28,8 @@ public class CarDealershipHandler extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootPane;
+
+	public static Logger logger = LoggerFactory.getLogger(CarDealershipHandler.class);
 
 	private Dealership dealership;
 	public DealershipDAO dealershipDAO;
@@ -112,8 +116,9 @@ public class CarDealershipHandler extends Application {
 		loader.setLocation(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
 		try {
 			rootPane = (BorderPane) loader.load();
+			logger.info("Alapnézet betöltve.");
 		} catch (IOException e) {
-			System.out.println("RootLayout.fxml betöltése sikertelen!");
+			logger.error("RootLayout.fxml betöltése sikertelen!", e);
 		}
 
 		Scene scene = new Scene(rootPane);
@@ -126,18 +131,14 @@ public class CarDealershipHandler extends Application {
 		loader.setLocation(getClass().getClassLoader().getResource("fxml/WelcomeStage.fxml"));
 		try {
 			AnchorPane anchorPane = (AnchorPane) loader.load();
-			/*anchorPane.setMaxHeight(rootPane.getPrefHeight());
-			anchorPane.setMaxWidth(rootPane.getPrefWidth());*/
+			logger.info("Üdvözlőképernyő betöltve.");
 			rootPane.setCenter(anchorPane);
 
 			WelcomeStageController controller = loader.getController();
 			//controller.setStage(primaryStage);
 			controller.setHandler(this);
-		} catch (LoadException e) {
-			System.out.println("WelcomeStage.fxml betöltése sikertelen!");
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("WelcomeStage.fxml betöltése sikertelen!", e);
 		}
 	}
 
@@ -146,8 +147,7 @@ public class CarDealershipHandler extends Application {
 			loader.setLocation(getClass().getClassLoader().getResource("fxml/DealershipOverview.fxml"));
 		try {
 			AnchorPane anchorPane = (AnchorPane) loader.load();
-			/*anchorPane.setMaxHeight(rootPane.getPrefHeight());
-			anchorPane.setMaxWidth(rootPane.getPrefWidth());*/
+			logger.info("Kereskedés-nézet betöltve.");
 			rootPane.setCenter(anchorPane);
 
 			DealershipOverviewController controller = loader.getController();
@@ -157,11 +157,9 @@ public class CarDealershipHandler extends Application {
 			controller.setProfitFieldText(getDealership().getProfit());
 			controller.setSoldCarsFieldText(getDealership().getSoldCars());
 			controller.setRemainderFieldText(getDealership().getRemainder());
-		} catch (LoadException e) {
-			System.out.println("DealershipOverview.fxml betöltése sikertelen!");
-			e.printStackTrace();
+			logger.info("Szövegmezők feltöltve.");
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("DealershipOverview.fxml betöltése sikertelen!", e);
 		}
 	}
 
@@ -291,9 +289,8 @@ public class CarDealershipHandler extends Application {
 	}
 
 	private boolean createRootDirectories() {
-		if (!(new File(PathUtil.getMainDir().toUri()).exists())) {
+		if (!(new File(PathUtil.getCarDir().toUri()).exists())) {
 			try {
-				Files.createDirectory(PathUtil.getMainDir());
 				Files.createDirectory(PathUtil.getDealershipDir());
 				Files.createDirectory(PathUtil.getCarDir());
 				Files.createDirectory(PathUtil.getCarsForSaleDir());
@@ -328,8 +325,10 @@ public class CarDealershipHandler extends Application {
 
 		initRootPane();
 
-		if (createRootDirectories())
+		if (createRootDirectories()) {
+			logger.info("Mappák elkészítve");
 			showWelcomeStage();
+		}
 		else if (!(new File(PathUtil.getDealershipDir() + System.getProperty("file.separator") + "dealership.xml").exists())) {
 			//carData = carDAO.getCarsForSale();
 			showWelcomeStage();

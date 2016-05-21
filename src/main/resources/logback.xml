@@ -1,0 +1,38 @@
+<!--
+	Ha a scan attribútum értékét "true"-ra módosítjuk, akkor a Logback
+	percenként ellenőrzi, hogy változott-e a konfigurációs állomány.
+	Változás esetén megfelelően igazítja hozzá a beállításokat. Az állomány
+	így akár futásidőben is módosítható.
+-->
+<configuration scan="true" debug="false">
+
+    <!-- A konzolon minden eseményt naplózunk -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %red(%.-1level) %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+        Az állományba csak adott szintű vagy annál magasabb szintű
+        eseményeket naplózunk (a jelenlegi beállítás esetén ERROR és
+        WARN szintű eseményeket)
+    -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/home/pistiz/.UsedCarDealershipFiles/log/messages.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+        A gyökér logger mindent az állományokba naplóz
+    -->
+
+    <root level="ALL">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
