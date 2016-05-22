@@ -1,3 +1,7 @@
+/**
+ * A projekt fő csomagja.
+ */
+
 @XmlJavaTypeAdapters({
 		@XmlJavaTypeAdapter(type = Year.class, value = YearAdapter.class),
 		@XmlJavaTypeAdapter(type = LocalDate.class, value = LocalDateAdapter.class)

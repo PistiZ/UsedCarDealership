@@ -1,3 +1,7 @@
+/**
+ * A programban felhasznált eszközöket tartalmazó csomag.
+ */
+
 @XmlJavaTypeAdapters({
 		@XmlJavaTypeAdapter(type = Year.class, value = YearAdapter.class),
 		@XmlJavaTypeAdapter(type = LocalDate.class, value = LocalDateAdapter.class)
