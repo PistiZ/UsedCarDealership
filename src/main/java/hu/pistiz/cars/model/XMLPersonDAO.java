@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 public class XMLPersonDAO implements PersonDAO {
 
 	/**
-	 * A személyek mappája
+	 * A személyek mappája.
 	 */
 	Path personDir = PathUtil.getPersonDir();
 

@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.CarDealershipHandler;
@@ -12,6 +13,9 @@ import javafx.scene.layout.Pane;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Az üdvözlőképernyő kezelője.
+ */
 public class WelcomeStageController {
 
 	@FXML

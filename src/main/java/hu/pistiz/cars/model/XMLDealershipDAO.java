@@ -17,7 +17,7 @@ import java.util.List;
 public class XMLDealershipDAO implements DealershipDAO {
 
 	/**
-	 * A kereskedés mappája
+	 * A kereskedés mappája.
 	 */
 	Path dealershipDir = PathUtil.getDealershipDir();
 

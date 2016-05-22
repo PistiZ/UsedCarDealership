@@ -21,11 +21,11 @@ import java.util.List;
 public class XMLCarDAO implements CarDAO {
 
 	/**
-	 * Az eladó autók mappája
+	 * Az eladó autók mappája.
 	 */
 	public Path carsForSaleDir = PathUtil.getCarsForSaleDir();
 	/**
-	 * Az eladott autók mappája
+	 * Az eladott autók mappája.
 	 */
 	public Path soldCarsDir = PathUtil.getSoldCarsDir();
 

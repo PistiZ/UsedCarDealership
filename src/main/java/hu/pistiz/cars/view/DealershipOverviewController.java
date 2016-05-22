@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.CarDealershipHandler;
@@ -9,10 +10,11 @@ import javafx.scene.control.Alert.AlertType;
 
 import java.util.Optional;
 
+/**
+ * A kereskedés általános nézetének kezelője.
+ */
 public class DealershipOverviewController {
 
-	/*@FXML
-	private AnchorPane pane;*/
 	@FXML
 	private Label companyNameLabel;
 	@FXML

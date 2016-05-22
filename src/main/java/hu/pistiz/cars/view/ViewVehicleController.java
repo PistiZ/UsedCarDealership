@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.model.Car;
@@ -8,6 +9,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * Az autó-megtekintés felület kezelője.
+ */
 public class ViewVehicleController {
 
 	@FXML

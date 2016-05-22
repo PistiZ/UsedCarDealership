@@ -41,7 +41,7 @@ public class Person {
 	}
 
 	/**
-	 * Visszadja a személy keresztnevét
+	 * Visszadja a személy keresztnevét.
 	 *
 	 * @return a személy keresztneve
 	 */
@@ -50,7 +50,7 @@ public class Person {
 	}
 
 	/**
-	 * Beállítja a személy keresztnevét
+	 * Beállítja a személy keresztnevét.
 	 *
 	 * @param firstName a személy keresztneve
 	 */
@@ -59,7 +59,7 @@ public class Person {
 	}
 
 	/**
-	 * Visszadja a személy vezetéknevét
+	 * Visszadja a személy vezetéknevét.
 	 *
 	 * @return a személy vezetékneve
 	 */
@@ -68,7 +68,7 @@ public class Person {
 	}
 
 	/**
-	 * Beállítja a személy vezetéknevét
+	 * Beállítja a személy vezetéknevét.
 	 *
 	 * @param lastName a személy vezetékneve
 	 */
@@ -77,7 +77,7 @@ public class Person {
 	}
 
 	/**
-	 * Visszadja a személy születési dátumát
+	 * Visszadja a személy születési dátumát.
 	 *
 	 * @return a személy születési dátuma
 	 */
@@ -86,7 +86,7 @@ public class Person {
 	}
 
 	/**
-	 * Beállítja a személy születési dátumát
+	 * Beállítja a személy születési dátumát.
 	 *
 	 * @param dateOfBirth a személy születési dátuma
 	 */

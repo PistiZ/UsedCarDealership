@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.model.service;
 
 import hu.pistiz.cars.model.Dealership;

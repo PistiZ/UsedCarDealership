@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.CarDealershipHandler;
@@ -12,6 +13,9 @@ import javafx.stage.Stage;
 import java.time.Year;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Az autó-szerkesztés felület kezelője.
+ */
 public class EditVehicleController {
 
 	@FXML

@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.CarDealershipHandler;
@@ -11,6 +12,9 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
+/**
+ * Az autó-eladás felület kezelője.
+ */
 public class SoldCarViewController {
 
 	@FXML

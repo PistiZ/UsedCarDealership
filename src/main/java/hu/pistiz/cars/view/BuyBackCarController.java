@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.CarDealershipHandler;
@@ -10,10 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
-import java.nio.file.FileAlreadyExistsException;
 import java.util.Optional;
 
+/**
+ * Az autó-visszavásárlás felület kezelője.
+ */
 public class BuyBackCarController {
 
 	@FXML

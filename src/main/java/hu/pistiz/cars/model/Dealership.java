@@ -245,6 +245,11 @@ public class Dealership {
 		this.profit += increment;
 	}
 
+	/**
+	 * Növeli az adott kereskedés aktuális egyenlegét.
+	 *
+	 * @param increment a növekmény
+	 */
 	public void incrementRemainder(long increment) {
 		this.remainder += increment;
 	}

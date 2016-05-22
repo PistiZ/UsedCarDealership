@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.view;
 
 import hu.pistiz.cars.CarDealershipHandler;
@@ -15,6 +16,9 @@ import java.nio.file.FileAlreadyExistsException;
 import java.time.Year;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Az új autó felület kezelője.
+ */
 public class NewVehicleController {
 
 	@FXML

@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars;
 
 import hu.pistiz.cars.model.*;
@@ -24,6 +25,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 
+/**
+ * A fő JavaFX osztály, amely iráníytja az alkalmazás működését.
+ */
 public class CarDealershipHandler extends Application {
 
 	private Stage primaryStage;
