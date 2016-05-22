@@ -2,6 +2,8 @@ package hu.pistiz.cars.model;
 
 import hu.pistiz.cars.util.JAXBUtil;
 import hu.pistiz.cars.util.PathUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
@@ -13,6 +15,8 @@ public class XMLDealershipDAO implements DealershipDAO {
 
 	Path dealershipDir = PathUtil.getDealershipDir();
 
+	public static Logger logger = LoggerFactory.getLogger(XMLDealershipDAO.class);
+
 	@Override
 	public void addDealership(Dealership dealership) {
 		try {
@@ -21,13 +25,17 @@ public class XMLDealershipDAO implements DealershipDAO {
 			try {
 				fileCreated = dealershipFile.createNewFile();
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(dealershipFile.toURI().toString() + " fájl elkészítése sikertelen.", e);
 			}
 
-			if (fileCreated)
+			if (fileCreated) {
 				JAXBUtil.toXML(dealership, new FileOutputStream(dealershipFile));
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
+				logger.info(dealership.getName() + " kereskedés felvéve.");
+			}
+		} catch (JAXBException e) {
+			logger.error("Sikertelen JAXB-művelet", e);
+		} catch (FileNotFoundException e) {
+			logger.error("A fájl nem található", e);
 		}
 	}
 
@@ -36,8 +44,9 @@ public class XMLDealershipDAO implements DealershipDAO {
 		Dealership dealership = null;
 		try {
 			dealership = JAXBUtil.fromXML(Dealership.class, new FileInputStream(new File((Paths.get(dealershipDir.toString(), "dealership.xml")).toUri())));
+			logger.info(dealership.getName() + " betöltése XML-ből sikeres.");
 		} catch (JAXBException e) {
-			e.printStackTrace();
+			logger.error("Sikertelen JAXB-művelet", e);
 		}
 		return dealership;
 	}
@@ -63,10 +72,14 @@ public class XMLDealershipDAO implements DealershipDAO {
 				}
 			}
 
-			if (fileCreated)
+			if (fileCreated) {
 				JAXBUtil.toXML(dealership, new FileOutputStream(dealershipFile));
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
+				logger.info(dealership.getName() + " frissítve.");
+			}
+		} catch (JAXBException e) {
+			logger.error("Sikertelen JAXB-művelet", e);
+		} catch (FileNotFoundException e) {
+			logger.error("A fájl nem található", e);
 		}
 	}
 

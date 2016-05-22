@@ -4,6 +4,8 @@ import hu.pistiz.cars.util.JAXBUtil;
 import hu.pistiz.cars.util.PathUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
@@ -18,27 +20,37 @@ public class XMLCarDAO implements CarDAO {
 	public Path carsForSaleDir = PathUtil.getCarsForSaleDir();
 	public Path soldCarsDir = PathUtil.getSoldCarsDir();
 
+	public static Logger logger = LoggerFactory.getLogger(XMLCarDAO.class);
+
 	@Override
 	public void newCar(Car car) throws FileAlreadyExistsException {
 		try {
 			File carForSaleFile = new File((Paths.get(carsForSaleDir.toString(), car.getLicensePlateNumber().toUpperCase() + ".xml")).toUri());
 			File soldCarFile = new File((Paths.get(soldCarsDir.toString(), car.getLicensePlateNumber().toUpperCase() + ".xml")).toUri());
 			boolean fileCreated = false;
-			if (carForSaleFile.exists())
+			if (carForSaleFile.exists()) {
+				logger.warn("Már fel lett véve eladó autóként!");
 				throw new FileAlreadyExistsException("Már fel lett véve eladó autóként!");
-			else if (soldCarFile.exists())
+			}
+			else if (soldCarFile.exists()) {
+				logger.warn("Már fel lett véve eladott autóként!");
 				throw new FileAlreadyExistsException("Már fel lett véve eladott autóként!");
+			}
 			else
 				try {
 					fileCreated = carForSaleFile.createNewFile();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error("Új eladó autó XML fájl készítése sikertelen", e);
 				}
 
-			if (fileCreated)
+			if (fileCreated) {
 				JAXBUtil.toXML(car, new FileOutputStream(carForSaleFile));
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
+				logger.info(car.getLicensePlateNumber() + " új autó felvéve.");
+			}
+		} catch (JAXBException e) {
+			logger.error("Sikertelen JAXB-művelet", e);
+		} catch (FileNotFoundException e) {
+			logger.error("A fájl nem található", e);
 		}
 	}
 
@@ -50,13 +62,17 @@ public class XMLCarDAO implements CarDAO {
 			try {
 				fileCreated = carFile.createNewFile();
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error("Új visszavásárolt eladó autó XML fájl készítése sikertelen", e);
 			}
 
-			if (fileCreated)
+			if (fileCreated) {
 				JAXBUtil.toXML(car, new FileOutputStream(carFile));
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
+				logger.info(car.getLicensePlateNumber() + " eladó autó felvéve.");
+			}
+		} catch (JAXBException e) {
+			logger.error("Sikertelen JAXB-művelet", e);
+		} catch (FileNotFoundException e) {
+			logger.error("A fájl nem található", e);
 		}
 	}
 
@@ -68,13 +84,17 @@ public class XMLCarDAO implements CarDAO {
 			try {
 				fileCreated = carFile.createNewFile();
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error("Új eladott autó XML fájl készítése sikertelen", e);
 			}
 
-			if (fileCreated)
+			if (fileCreated) {
 				JAXBUtil.toXML(car, new FileOutputStream(carFile));
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
+				logger.info(car.getLicensePlateNumber() + " eladott autó felvéve.");
+			}
+		} catch (JAXBException e) {
+			logger.error("Sikertelen JAXB-művelet", e);
+		} catch (FileNotFoundException e) {
+			logger.error("A fájl nem található", e);
 		}
 	}
 
@@ -90,8 +110,12 @@ public class XMLCarDAO implements CarDAO {
 		File carFile = new File((Paths.get(soldCarsDir.toString(), licensePlateNumber + ".xml").toUri()));
 		try {
 			car = JAXBUtil.fromXML(Car.class,  new FileInputStream(carFile));
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
+			logger.info("Új " + car.getLicensePlateNumber() + " rendszámú "
+					+ car.getBrand() + " " + car.getModel() + " eladott gépjármű betöltése XML-ből sikeres.");
+		} catch (JAXBException e) {
+			logger.error("Sikertelen JAXB-művelet", e);
+		} catch (FileNotFoundException e) {
+			logger.error("A fájl nem található", e);
 		}
 		return car;
 	}
@@ -105,8 +129,10 @@ public class XMLCarDAO implements CarDAO {
 			try {
 				Car car = JAXBUtil.fromXML(Car.class,  new FileInputStream(new File((Paths.get(carsForSaleDir.toString(), file)).toUri())));
 				carsForSale.add(car);
-			} catch (JAXBException | FileNotFoundException e) {
-				e.printStackTrace();
+			} catch (JAXBException e) {
+				logger.error("Sikertelen JAXB-művelet", e);
+			} catch (FileNotFoundException e) {
+				logger.error("A fájl nem található", e);
 			}
 		}
 		return carsForSale;
@@ -121,8 +147,10 @@ public class XMLCarDAO implements CarDAO {
 			try {
 				Car car = JAXBUtil.fromXML(Car.class,  new FileInputStream(new File((Paths.get(soldCarsDir.toString(), file)).toUri())));
 				soldCars.add(car);
-			} catch (JAXBException | FileNotFoundException e) {
-				e.printStackTrace();
+			} catch (JAXBException e) {
+				logger.error("Sikertelen JAXB-művelet", e);
+			} catch (FileNotFoundException e) {
+				logger.error("A fájl nem található", e);
 			}
 		}
 		return soldCars;
@@ -131,6 +159,7 @@ public class XMLCarDAO implements CarDAO {
 	@Override
 	public List<String> getSoldCarsList() {
 		File carFile = new File((Paths.get(soldCarsDir.toString()).toUri()));
+		logger.info("Eladott autók listázása.");
 		return Arrays.asList(carFile.list());
 	}
 
@@ -144,21 +173,25 @@ public class XMLCarDAO implements CarDAO {
 				try {
 					fileCreated = carFile.createNewFile();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error(carFile.toURI().toString() + " fájl létrehozása sikertelen", e);
 				}
 			}
 			else {
 				try {
 					fileCreated = carFile.createNewFile();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error(carFile.toURI().toString() + " fájl létrehozása sikertelen", e);
 				}
 			}
 
-			if (fileCreated)
+			if (fileCreated) {
 				JAXBUtil.toXML(car, new FileOutputStream(carFile));
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
+				logger.info(car.getLicensePlateNumber() + " rendszámú autó frissítve.");
+			}
+		} catch (JAXBException e) {
+			logger.error("Sikertelen JAXB-művelet", e);
+		} catch (FileNotFoundException e) {
+			logger.error("A fájl nem található", e);
 		}
 	}
 
@@ -167,6 +200,7 @@ public class XMLCarDAO implements CarDAO {
 		File carFile = new File((Paths.get(carsForSaleDir.toString(), licensePlateNumber + ".xml")).toUri());
 		if (carFile.exists())
 			carFile.delete();
+		logger.info(carFile.toURI().toString() + " eladó autó XML fájlja törölve.");
 	}
 
 	@Override
@@ -174,6 +208,7 @@ public class XMLCarDAO implements CarDAO {
 		File carFile = new File((Paths.get(soldCarsDir.toString(), licensePlateNumber + ".xml")).toUri());
 		if (carFile.exists())
 			carFile.delete();
+		logger.info(carFile.toURI().toString() + " eladott autó XML fájlja törölve.");
 	}
 
 	/*@Override

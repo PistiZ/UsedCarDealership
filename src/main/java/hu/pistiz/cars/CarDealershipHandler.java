@@ -180,13 +180,11 @@ public class CarDealershipHandler extends Application {
 			controller.setHandler(this);
 			controller.setDialogStage(dialogStage);
 
+			logger.info("Új autó-nézet betöltve.");
 			dialogStage.showAndWait();
 
-		} catch (LoadException e) {
-			System.out.println("NewVehicle.fxml betöltése sikertelen!");
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		}  catch (IOException e) {
+			logger.error("NewVehicle.fxml betöltése sikertelen!", e);
 		}
 	}
 
@@ -208,10 +206,11 @@ public class CarDealershipHandler extends Application {
 			controller.setHandler(this);
 			controller.setAndPrintCar(car);
 
+			logger.info("Autó szerkesztése-nézet betöltve.");
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("EditVehicle.fxml betöltése sikertelen!", e);
 		}
 	}
 
@@ -232,10 +231,11 @@ public class CarDealershipHandler extends Application {
 			controller.setDialogStage(dialogStage);
 			controller.setAndPrintVehicle(car);
 
+			logger.info("Autó megtekintése-nézet betöltve.");
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("ViewVehicle.fxml betöltése sikertelen!", e);
 		}
 	}
 
@@ -257,10 +257,11 @@ public class CarDealershipHandler extends Application {
 			controller.setHandler(this);
 			controller.setAndPrintCar(car);
 
+			logger.info("Autó eladása-nézet betöltve.");
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("SoldCarView.fxml betöltése sikertelen!", e);
 		}
 	}
 
@@ -281,10 +282,11 @@ public class CarDealershipHandler extends Application {
 			controller.setDialogStage(dialogStage);
 			controller.setHandler(this);
 
+			logger.info("Autó visszavásárlása-nézet betöltve.");
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("BuyBackCar.fxml betöltése sikertelen!", e);
 		}
 	}
 
@@ -297,8 +299,9 @@ public class CarDealershipHandler extends Application {
 				Files.createDirectory(PathUtil.getSoldCarsDir());
 				Files.createDirectory(PathUtil.getImageDir());
 				Files.createDirectory(PathUtil.getPersonDir());
+				logger.info("Mappák elkészítve");
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error("Mappák készítése sikertelen", e);
 			}
 			return true;
 		} else
@@ -313,8 +316,9 @@ public class CarDealershipHandler extends Application {
 			//profit = new SimpleLongProperty(dealership.getProfit());
 			carData = carDAO.getCarsForSale();
 			carData.addListener((ListChangeListener<Car>) c -> carData = carDAO.getCarsForSale());
+			logger.info("Gépjármű-adatok betöltve.");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			logger.error("Fájl nem található!", e);
 		}
 	}
 
@@ -326,7 +330,6 @@ public class CarDealershipHandler extends Application {
 		initRootPane();
 
 		if (createRootDirectories()) {
-			logger.info("Mappák elkészítve");
 			showWelcomeStage();
 		}
 		else if (!(new File(PathUtil.getDealershipDir() + System.getProperty("file.separator") + "dealership.xml").exists())) {

@@ -2,6 +2,8 @@ package hu.pistiz.cars.model;
 
 import hu.pistiz.cars.util.JAXBUtil;
 import hu.pistiz.cars.util.PathUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
@@ -11,6 +13,8 @@ import java.nio.file.Paths;
 public class XMLPersonDAO implements PersonDAO {
 
 	Path personDir = PathUtil.getPersonDir();
+
+	public static Logger logger = LoggerFactory.getLogger(XMLPersonDAO.class);
 
 	@Override
 	public void addPerson(Person person) {
@@ -23,10 +27,14 @@ public class XMLPersonDAO implements PersonDAO {
 				e.printStackTrace();
 			}
 
-			if (fileCreated)
+			if (fileCreated) {
 				JAXBUtil.toXML(person, new FileOutputStream(personFile));
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
+				logger.info(person.getLastName() + " " + person.getFirstName() + " tulajdonos felvéve.");
+			}
+		} catch (JAXBException e) {
+			logger.error("Sikertelen JAXB-művelet", e);
+		} catch (FileNotFoundException e) {
+			logger.error("A fájl nem található", e);
 		}
 	}
 
@@ -35,8 +43,9 @@ public class XMLPersonDAO implements PersonDAO {
 		Person person = null;
 		try {
 			person = JAXBUtil.fromXML(Person.class, new FileInputStream(new File((Paths.get(personDir.toString(), "owner.xml")).toUri())));
+			logger.info(person.getLastName() + " " + person.getFirstName() + " tulajdonos betöltve XML-ből");
 		} catch (JAXBException e) {
-			e.printStackTrace();
+			logger.error("Sikertelen JAXB-művelet", e);
 		}
 		return person;
 	}

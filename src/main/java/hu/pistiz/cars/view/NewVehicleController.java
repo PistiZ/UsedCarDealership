@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.file.FileAlreadyExistsException;
 import java.time.Year;
@@ -35,6 +37,8 @@ public class NewVehicleController {
 	private ComboBox<Condition> conditionBox;
 	@FXML
 	private TextArea descriptionArea;
+
+	public static Logger logger = LoggerFactory.getLogger(NewVehicleController.class);
 
 	private Stage dialogStage;
 
@@ -147,7 +151,7 @@ public class NewVehicleController {
 	@FXML
 	private void handleSave() {
 		if (isInputValid()) {
-			car = new Car();
+			car = handler.getCarService().createCar();
 			car.setBrand(brandField.getText());
 			car.setModel(modelField.getText());
 			car.setVariant(variantField.getText());
@@ -161,7 +165,6 @@ public class NewVehicleController {
 
 			try {
 				handler.getCarDAO().newCar(car);
-				//handler.getDealership().getCarsForSale().add(car);
 				handler.getCarData().add(car);
 				handler.getDealershipService().decreaseRemainder(handler.getDealership(), car.getPurchasePrice());
 				handler.getDealershipDAO().updateDealership(handler.getDealership());

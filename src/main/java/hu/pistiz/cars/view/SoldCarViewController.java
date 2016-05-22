@@ -85,7 +85,7 @@ public class SoldCarViewController {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					car.setSalePrice(salePrice);
-					handler.getCarDAO().updateCar(car);
+					//handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
 					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());
@@ -108,7 +108,7 @@ public class SoldCarViewController {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					car.setSalePrice(salePrice);
-					handler.getCarDAO().updateCar(car);
+					//handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
 					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());
@@ -130,7 +130,7 @@ public class SoldCarViewController {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					car.setSalePrice(salePrice);
-					handler.getCarDAO().updateCar(car);
+					//handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
 					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());

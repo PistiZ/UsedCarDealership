@@ -80,7 +80,7 @@ public class BuyBackCarController {
 	private void handleSave() {
 		if (isInputValid()) {
 			String errorMessage = "";
-			Car buyBackCar = new Car();
+			Car buyBackCar = handler.getCarService().createCar();
 			Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
 			confirmation.initOwner(dialogStage);
 			confirmation.setTitle("Megerősítés szükséges");
