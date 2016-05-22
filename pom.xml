@@ -111,6 +111,10 @@
                                 <requireJavaVersion>
                                     <version>1.8</version>
                                 </requireJavaVersion>
+                                <requireProperty>
+                                    <property>java.vendor</property>
+                                    <regex>^Oracle Corporation$</regex>
+                                </requireProperty>
                             </rules>
                         </configuration>
                     </execution>

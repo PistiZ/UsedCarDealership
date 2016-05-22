@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.pistiz.cars.model;
 
 import javafx.collections.ObservableList;
@@ -5,6 +6,9 @@ import javafx.collections.ObservableList;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.List;
 
+/**
+ * Autók kezelésére szolgáló DAO interfész.
+ */
 public interface CarDAO {
 
 	void newCar(Car car) throws FileAlreadyExistsException;

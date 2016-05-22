@@ -5,8 +5,9 @@ import java.time.Year;
 import javax.xml.bind.annotation.*;
 
 /**
- * Gépjárművet reprezentáló osztály.
- * Az osztály példányai a kereskedésekben használhatóak fel.
+ * Autót reprezentáló osztály.
+ *
+ * Az osztály példányaival dolgozik a program a kereskedés kezelése során.
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -35,247 +36,220 @@ public class Car {
 	@XmlElement
 	private String description;
 
+	/**
+	 * Paraméter nélküli konstruktor, mely a márkát és a modellt <code>null</code>-ra állítja.
+	 */
 	public Car() {
 		this(null, null);
 	}
 
 	/**
-	 * Constructor with some initial data.
+	 * A <code>Car</code> osztály fő konstruktora.
 	 *
+	 * @param brand a létrehozni kívánt autó márkája
+	 * @param model a létrehozni kívánt autó modellje
 	 */
 	public Car(String brand, String model) {
 		this.brand = brand;
 		this.model = model;
-		//this.licensePlateNumber = "ASD-123";
-
-		/*this.variant = new SimpleStringProperty("");
-		this.date = new SimpleObjectProperty<>(Year.of(2016));
-		this.purchasePrice = new SimpleLongProperty(1000000);
-		this.salePrice = new SimpleLongProperty(1100000);
-		this.km = new SimpleLongProperty(200000);
-		this.fuel = new SimpleObjectProperty<>(Fuel.benzin);
-		this.condition = new SimpleObjectProperty<>(Condition.megkímélt);
-		this.description = new SimpleStringProperty("Üres leírás");*/
-		//this.image = new SimpleObjectProperty<>()
 	}
 
+	/**
+	 * Visszadja az autó márkáját.
+	 *
+	 * @return az autó márkája
+	 */
 	public String getBrand() {
 		return brand;
 	}
 
+	/**
+	 * Beállítja az autó márkáját.
+	 *
+	 * @param brand az autó márkája
+	 */
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
 
+	/**
+	 * Visszadja az autó modelljét.
+	 *
+	 * @return az autó modellje
+	 */
 	public String getModel() {
 		return model;
 	}
 
+	/**
+	 * Beállítja az autó modelljét.
+	 *
+	 * @param model az autó modellje
+	 */
 	public void setModel(String model) {
 		this.model = model;
 	}
 
+	/**
+	 * Visszadja az autó típusát.
+	 *
+	 * @return az autó típusa
+	 */
 	public String getVariant() {
 		return variant;
 	}
 
+	/**
+	 * Beállítja az autó típusát.
+	 *
+	 * @param variant az autó típusa
+	 */
 	public void setVariant(String variant) {
 		this.variant = variant;
 	}
 
+	/**
+	 * Visszadja az autó rendszámát.
+	 *
+	 * @return az autó rendszáma
+	 */
 	public String getLicensePlateNumber() {
 		return licensePlateNumber;
 	}
 
+	/**
+	 * Beállítja az autó rendszámát.
+	 *
+	 * @param licensePlateNumber az autó rendszáma
+	 */
 	public void setLicensePlateNumber(String licensePlateNumber) {
 		this.licensePlateNumber = licensePlateNumber;
 	}
 
+	/**
+	 * Visszadja az autó évjáratát.
+	 *
+	 * @return az autó évjárata
+	 */
 	public Year getDate() {
 		return date;
 	}
 
+	/**
+	 * Beállítja az autó évjáratát.
+	 *
+	 * @param date az autó évjárata
+	 */
 	public void setDate(Year date) {
 		this.date = date;
 	}
 
+	/**
+	 * Visszadja az autó vételárát.
+	 *
+	 * @return az autó vételára
+	 */
 	public long getPurchasePrice() {
 		return purchasePrice;
 	}
 
+	/**
+	 * Beállítja az autó vételárát.
+	 *
+	 * @param purchasePrice az autó vételára
+	 */
 	public void setPurchasePrice(long purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
 
+	/**
+	 * Visszadja az árat, amennyiért az autó el lett adva.
+	 *
+	 * @return az autó eladási ára
+	 */
 	public long getSalePrice() {
 		return salePrice;
 	}
 
+	/**
+	 * Beállítja az autó eladási árát.
+	 *
+	 * @param salePrice az autó eladási ára
+	 */
 	public void setSalePrice(long salePrice) {
 		this.salePrice = salePrice;
 	}
 
+	/**
+	 * Visszadja az autó kilométeróra-állását.
+	 *
+	 * @return az autó kilométeróra-állása
+	 */
 	public long getKm() {
 		return km;
 	}
 
+	/**
+	 * Beállítja az autó kilométeróra-állását.
+	 *
+	 * @param km az autó kilométeróra-állása
+	 */
 	public void setKm(long km) {
 		this.km = km;
 	}
 
+	/**
+	 * Visszadja az autó üzemanyag-típusát.
+	 *
+	 * @return az autó üzemanyag-típusa
+	 */
 	public Fuel getFuel() {
 		return fuel;
 	}
 
+	/**
+	 * Beállítja az autó üzemanyag-típusát.
+	 *
+	 * @param fuel az autó üzemanyag-típusa
+	 */
 	public void setFuel(Fuel fuel) {
 		this.fuel = fuel;
 	}
 
+	/**
+	 * Visszadja az autó állapot-típusát.
+	 *
+	 * @return az autó állapot-típusa
+	 */
 	public Condition getCondition() {
 		return condition;
 	}
 
+	/**
+	 * Beállítja az autó állapot-típusát.
+	 *
+	 * @param condition az autó állapot-típusa
+	 */
 	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
 
+	/**
+	 * Visszadja az autó bő leírását.
+	 *
+	 * @return az autó bő leírása
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Beállítja az autó bő leírását.
+	 *
+	 * @param description az autó bő leírása
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/*public String getBrand() {
-		return brand.get();
-	}
-
-	public StringProperty brandProperty() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand.set(brand);
-	}
-
-	public String getModel() {
-		return model.get();
-	}
-
-	public StringProperty modelProperty() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model.set(model);
-	}
-
-	public String getLicensePlateNumber() {
-		return licensePlateNumber.get();
-	}
-
-	public StringProperty licensePlateNumberProperty() {
-		return licensePlateNumber;
-	}
-
-	public void setLicensePlateNumber(String licensePlateNumber) {
-		this.licensePlateNumber.set(licensePlateNumber);
-	}
-
-	public String getVariant() {
-		return variant.get();
-	}
-
-	public StringProperty variantProperty() {
-		return variant;
-	}
-
-	public void setVariant(String variant) {
-		this.variant.set(variant);
-	}
-
-	public Year getDate() {
-		return date.get();
-	}
-
-	public ObjectProperty<Year> dateProperty() {
-		return date;
-	}
-
-	public void setDate(Year date) {
-		this.date.set(date);
-	}
-
-	public long getPurchasePrice() {
-		return purchasePrice.get();
-	}
-
-	public LongProperty purchasePriceProperty() {
-		return purchasePrice;
-	}
-
-	public void setPurchasePrice(long purchasePrice) {
-		this.purchasePrice.set(purchasePrice);
-	}
-
-	public long getSalePrice() {
-		return salePrice.get();
-	}
-
-	public LongProperty salePriceProperty() {
-		return salePrice;
-	}
-
-	public void setSalePrice(long salePrice) {
-		this.salePrice.set(salePrice);
-	}
-
-	public long getKm() {
-		return km.get();
-	}
-
-	public LongProperty kmProperty() {
-		return km;
-	}
-
-	public void setKm(long km) {
-		this.km.set(km);
-	}
-
-	public Fuel getFuel() {
-		return fuel.get();
-	}
-
-	public ObjectProperty<Fuel> fuelProperty() {
-		return fuel;
-	}
-
-	public void setFuel(Fuel fuel) {
-		this.fuel.set(fuel);
-	}
-
-	public Condition getCondition() {
-		return condition.get();
-	}
-
-	public ObjectProperty<Condition> conditionProperty() {
-		return condition;
-	}
-
-	public void setCondition(Condition condition) {
-		this.condition.set(condition);
-	}
-
-	public String getDescription() {
-		return description.get();
-	}
-
-	public StringProperty descriptionProperty() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description.set(description);
-	}*/
 }

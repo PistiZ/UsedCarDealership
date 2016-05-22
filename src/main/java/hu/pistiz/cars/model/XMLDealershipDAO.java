@@ -11,12 +11,26 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * <a href="Dealership.html">Dealership</a> objektumok XML-ben történő kezelését végző osztály.
+ */
 public class XMLDealershipDAO implements DealershipDAO {
 
+	/**
+	 * A kereskedés mappája
+	 */
 	Path dealershipDir = PathUtil.getDealershipDir();
 
+	/**
+	 * A naplózást végző logger.
+	 */
 	public static Logger logger = LoggerFactory.getLogger(XMLDealershipDAO.class);
 
+	/**
+	 * Létrehozza a kereskedés XML fájlját.
+	 *
+	 * @param dealership a menteni kívánt kereskedés
+	 */
 	@Override
 	public void addDealership(Dealership dealership) {
 		try {
@@ -39,6 +53,12 @@ public class XMLDealershipDAO implements DealershipDAO {
 		}
 	}
 
+	/**
+	 * XML-ből betölti a tárolt kereskedést.
+	 *
+	 * @return a betöltött kereskedés
+	 * @throws FileNotFoundException kiváltódik, ha a dealership.xml nem található
+	 */
 	@Override
 	public Dealership getDealership() throws FileNotFoundException {
 		Dealership dealership = null;
@@ -51,6 +71,11 @@ public class XMLDealershipDAO implements DealershipDAO {
 		return dealership;
 	}
 
+	/**
+	 * Frissíti a kereskedést XML-ben.
+	 *
+	 * @param dealership a frissítendő kereskedés
+	 */
 	@Override
 	public void updateDealership(Dealership dealership) {
 		try {
@@ -81,41 +106,5 @@ public class XMLDealershipDAO implements DealershipDAO {
 		} catch (FileNotFoundException e) {
 			logger.error("A fájl nem található", e);
 		}
-	}
-
-	/*@Override
-	public Dealership getDealershipByName(String name) throws FileNotFoundException {
-		Dealership dealership = null;
-		try {
-			 dealership = JAXBUtil.fromXML(Dealership.class, new FileInputStream(new File(Paths.get(dealershipDir.toString(), name) + ".xml")));
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-		return dealership;
-	}*/
-
-	@Override
-	public List<Car> getAllCars() {
-		return null;
-	}
-
-	@Override
-	public void addCarForSale(Car car) {
-
-	}
-
-	@Override
-	public void addSoldCar(Car car) {
-
-	}
-
-	@Override
-	public void removeCarForSale(Car car) {
-
-	}
-
-	@Override
-	public void removeSoldCar(Car car) {
-
 	}
 }

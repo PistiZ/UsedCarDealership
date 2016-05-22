@@ -15,13 +15,31 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <a href="Car.html">Car</a> objektumok XML-ben történő kezelését végző osztály.
+ */
 public class XMLCarDAO implements CarDAO {
 
+	/**
+	 * Az eladó autók mappája
+	 */
 	public Path carsForSaleDir = PathUtil.getCarsForSaleDir();
+	/**
+	 * Az eladott autók mappája
+	 */
 	public Path soldCarsDir = PathUtil.getSoldCarsDir();
 
+	/**
+	 * A naplózást végző logger.
+	 */
 	public static Logger logger = LoggerFactory.getLogger(XMLCarDAO.class);
 
+	/**
+	 * Új autó felvételekor a paraméterként kapott objektumot XML-be menti.
+	 *
+	 * @param car a menteni kívánt autó
+	 * @throws FileAlreadyExistsException ha az autó már létezik az adatbázisban
+	 */
 	@Override
 	public void newCar(Car car) throws FileAlreadyExistsException {
 		try {
@@ -54,6 +72,13 @@ public class XMLCarDAO implements CarDAO {
 		}
 	}
 
+	/**
+	 * A paraméterként kapott objektumot eladó autóként veszi fel.
+	 *
+	 * Visszavásárláskor használatos.
+	 *
+	 * @param car a menteni kívánt autó
+	 */
 	@Override
 	public void addCarForSale(Car car) {
 		try {
@@ -76,6 +101,11 @@ public class XMLCarDAO implements CarDAO {
 		}
 	}
 
+	/**
+	 * A paraméterként kapott objektumot eladott autóként veszi fel.
+	 *
+	 * @param car a menteni kívánt autó
+	 */
 	@Override
 	public void addSoldCar(Car car) {
 		try {
@@ -98,12 +128,12 @@ public class XMLCarDAO implements CarDAO {
 		}
 	}
 
-	/*@Override
-	public boolean findIfSoldCarPresents(String licensePlateNumber) {
-		File carFile = new File((Paths.get(soldCarsDir.toString(), licensePlateNumber + ".xml").toUri()));
-		return carFile.exists();
-	}*/
-
+	/**
+	 * Eladott autót tölt be rendszám alapján.
+	 *
+	 * @param licensePlateNumber a betölteni kívánt autó rendszáma
+	 * @return a betöltött eladott autó
+	 */
 	@Override
 	public Car getSoldCarByLPN(String licensePlateNumber) {
 		Car car = new Car();
@@ -120,6 +150,11 @@ public class XMLCarDAO implements CarDAO {
 		return car;
 	}
 
+	/**
+	 * Az eladó autók listáját kéri le.
+	 *
+	 * @return az eladó autók listája
+	 */
 	@Override
 	public ObservableList<Car> getCarsForSale() {
 		ObservableList<Car> carsForSale = FXCollections.observableArrayList();
@@ -138,6 +173,11 @@ public class XMLCarDAO implements CarDAO {
 		return carsForSale;
 	}
 
+	/**
+	 * Az eladott autók listáját kéri le.
+	 *
+	 * @return az eladott autók listája
+	 */
 	@Override
 	public ObservableList<Car> getSoldCars() {
 		ObservableList<Car> soldCars = FXCollections.observableArrayList();
@@ -156,6 +196,11 @@ public class XMLCarDAO implements CarDAO {
 		return soldCars;
 	}
 
+	/**
+	 * Az eladó autók fájlneveinek listáját adja meg.
+	 *
+	 * @return az eladó autók fájlnevei
+	 */
 	@Override
 	public List<String> getSoldCarsList() {
 		File carFile = new File((Paths.get(soldCarsDir.toString()).toUri()));
@@ -163,6 +208,11 @@ public class XMLCarDAO implements CarDAO {
 		return Arrays.asList(carFile.list());
 	}
 
+	/**
+	 * A paraméterként kapott autót frissíti XML-ben.
+	 *
+	 * @param car a frissítendő autó
+	 */
 	@Override
 	public void updateCar(Car car) {
 		try {
@@ -195,6 +245,11 @@ public class XMLCarDAO implements CarDAO {
 		}
 	}
 
+	/**
+	 * Eladó autót töröl.
+	 *
+	 * @param licensePlateNumber a törlendő autó
+	 */
 	@Override
 	public void removeCarForSale(String licensePlateNumber) {
 		File carFile = new File((Paths.get(carsForSaleDir.toString(), licensePlateNumber + ".xml")).toUri());
@@ -203,6 +258,11 @@ public class XMLCarDAO implements CarDAO {
 		logger.info(carFile.toURI().toString() + " eladó autó XML fájlja törölve.");
 	}
 
+	/**
+	 * Eladott autót töröl.
+	 *
+	 * @param licensePlateNumber a törlendő autó
+	 */
 	@Override
 	public void removeSoldCar(String licensePlateNumber) {
 		File carFile = new File((Paths.get(soldCarsDir.toString(), licensePlateNumber + ".xml")).toUri());
@@ -210,26 +270,5 @@ public class XMLCarDAO implements CarDAO {
 			carFile.delete();
 		logger.info(carFile.toURI().toString() + " eladott autó XML fájlja törölve.");
 	}
-
-	/*@Override
-	public void carToXML(Car car, String fileName) {
-		Path dir = Paths.get(System.getProperty("user.home"), ".UserCarDealershipFiles");
-		Path path = Paths.get(System.getProperty("user.home"), ".UserCarDealershipFiles", fileName);
-		File saveFile = path.toFile();
-
-		if (!new File(dir.toUri()).exists()) {
-			try {
-				Files.createDirectory(dir);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			OutputStream os = new FileOutputStream(saveFile);
-			JAXBUtil.toXML(car, os);
-		} catch (JAXBException | FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}*/
 
 }

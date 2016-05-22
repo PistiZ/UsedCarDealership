@@ -10,12 +10,26 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * <a href="Person.html">Person</a> objektumok XML-ben történő kezelését végző osztály.
+ */
 public class XMLPersonDAO implements PersonDAO {
 
+	/**
+	 * A személyek mappája
+	 */
 	Path personDir = PathUtil.getPersonDir();
 
+	/**
+	 * A naplózást végző logger.
+	 */
 	public static Logger logger = LoggerFactory.getLogger(XMLPersonDAO.class);
 
+	/**
+	 * A paraméterként kapott személyt XML-ben tárolja.
+	 *
+	 * @param person a menteni kívánt személy
+	 */
 	@Override
 	public void addPerson(Person person) {
 		try {
@@ -38,6 +52,12 @@ public class XMLPersonDAO implements PersonDAO {
 		}
 	}
 
+	/**
+	 * Betölti a tulajdonost XML-ből.
+	 *
+	 * @return a betöltött személy (tulajdonos)
+	 * @throws FileNotFoundException kiváltódik, ha az owner.xml nem létezik
+	 */
 	@Override
 	public Person getPerson() throws FileNotFoundException {
 		Person person = null;
