@@ -295,8 +295,9 @@ public class CarDealershipHandler extends Application {
 	}
 
 	private boolean createRootDirectories() {
-		if (!(new File(PathUtil.getCarDir().toUri()).exists())) {
+		if (!(new File(PathUtil.getMainDir().toUri()).exists())) {
 			try {
+				Files.createDirectory(PathUtil.getMainDir());
 				Files.createDirectory(PathUtil.getDealershipDir());
 				Files.createDirectory(PathUtil.getCarDir());
 				Files.createDirectory(PathUtil.getCarsForSaleDir());
