@@ -89,10 +89,10 @@ public class SoldCarViewController {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					car.setSalePrice(salePrice);
-					//handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
 					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());
+
 					handler.getDealershipService().incrementIncome(handler.getDealership(), salePrice);
 					handler.getDealershipService().incrementProfit(handler.getDealership(), profit);
 					handler.getDealershipService().incrementRemainder(handler.getDealership(), salePrice);
@@ -112,10 +112,10 @@ public class SoldCarViewController {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					car.setSalePrice(salePrice);
-					//handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
 					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());
+
 					handler.getDealershipService().incrementIncome(handler.getDealership(), salePrice);
 					handler.getDealershipService().incrementProfit(handler.getDealership(), profit);
 					handler.getDealershipService().incrementRemainder(handler.getDealership(), salePrice);
@@ -134,10 +134,10 @@ public class SoldCarViewController {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					car.setSalePrice(salePrice);
-					//handler.getCarDAO().updateCar(car);
 					handler.getCarDAO().addSoldCar(car);
 					handler.getCarDAO().removeCarForSale(car.getLicensePlateNumber());
 					handler.setCarData(handler.carDAO.getCarsForSale());
+
 					handler.getDealershipService().incrementIncome(handler.getDealership(), salePrice);
 					handler.getDealershipService().incrementProfit(handler.getDealership(), profit);
 					handler.getDealershipService().incrementRemainder(handler.getDealership(), salePrice);

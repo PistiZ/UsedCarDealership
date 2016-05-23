@@ -43,11 +43,6 @@ public class EditVehicleController {
 
 	private CarDealershipHandler handler;
 	private Car car;
-	private boolean saveClicked = false;
-
-	public Car getCar() {
-		return car;
-	}
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
@@ -56,10 +51,6 @@ public class EditVehicleController {
 
 	public void setHandler(CarDealershipHandler handler) {
 		this.handler = handler;
-	}
-
-	public boolean isSaveClicked() {
-		return saveClicked;
 	}
 
 	@FXML
@@ -145,7 +136,6 @@ public class EditVehicleController {
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			// Show the error message.
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(dialogStage);
 			alert.setTitle("Hibás mezők");
@@ -184,7 +174,6 @@ public class EditVehicleController {
 				handler.getDealershipDAO().updateDealership(handler.getDealership());
 			}
 
-			saveClicked = true;
 			dialogStage.close();
 		}
 	}

@@ -5,8 +5,6 @@ import hu.pistiz.cars.model.Car;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileNotFoundException;
-import java.nio.file.FileAlreadyExistsException;
 import java.util.List;
 
 /**

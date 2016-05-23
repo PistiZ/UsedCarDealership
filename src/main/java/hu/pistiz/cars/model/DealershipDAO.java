@@ -2,7 +2,6 @@
 package hu.pistiz.cars.model;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 
 /**
  * Kereskedés kezelésére szolgáló DAO interfész.

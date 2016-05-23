@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.LoadException;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -43,8 +42,6 @@ public class CarDealershipHandler extends Application {
 	public PersonDAO personDAO;
 
 	private ObservableList<Car> carData = FXCollections.observableArrayList();
-	//private ObservableLongValue income;
-	//private ObservableLongValue profit;
 
 	public CarDealershipHandler() {
 		dealership = new Dealership();
@@ -99,22 +96,6 @@ public class CarDealershipHandler extends Application {
 		this.dealership = dealership;
 	}
 
-	/*public Number getIncome() {
-		return income.get();
-	}
-
-	public ObservableLongValue incomeProperty() {
-		return income;
-	}*/
-
-	/*public Number getProfit() {
-		return profit.get();
-	}
-
-	public ObservableLongValue profitProperty() {
-		return profit;
-	}*/
-
 	public void initRootPane() {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
@@ -139,7 +120,6 @@ public class CarDealershipHandler extends Application {
 			rootPane.setCenter(anchorPane);
 
 			WelcomeStageController controller = loader.getController();
-			//controller.setStage(primaryStage);
 			controller.setHandler(this);
 		} catch (IOException e) {
 			logger.error("WelcomeStage.fxml betöltése sikertelen!", e);
@@ -317,8 +297,6 @@ public class CarDealershipHandler extends Application {
 		try {
 			dealership = dealershipDAO.getDealership();
 			dealership.setOwner(personDAO.getPerson());
-			//income = new SimpleLongProperty(dealership.getIncome());
-			//profit = new SimpleLongProperty(dealership.getProfit());
 			carData = carDAO.getCarsForSale();
 			carData.addListener((ListChangeListener<Car>) c -> carData = carDAO.getCarsForSale());
 			logger.info("Gépjármű-adatok betöltve.");
@@ -338,7 +316,7 @@ public class CarDealershipHandler extends Application {
 			showWelcomeStage();
 		}
 		else if (!(new File(PathUtil.getDealershipDir() + System.getProperty("file.separator") + "dealership.xml").exists())) {
-			//carData = carDAO.getCarsForSale();
+			carData = carDAO.getCarsForSale();
 			showWelcomeStage();
 		}
 		else {

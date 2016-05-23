@@ -51,9 +51,6 @@ public class ViewVehicleController {
 
 	@FXML
 	private void initialize() {
-		/*InputStream agera = this.getClass().getClassLoader().getResourceAsStream("agera.jpg");
-		Image pic = new Image(agera);
-		image.setImage(pic);*/
 	}
 
 	public void setAndPrintVehicle(Car car) {

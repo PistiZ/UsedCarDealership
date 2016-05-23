@@ -37,7 +37,6 @@ public class DealershipOverviewController {
 	private TextField remainderField;
 
 	private CarDealershipHandler handler;
-	//private XMLCarDAO carDAO = new XMLCarDAO();
 
 	public DealershipOverviewController() {
 	}
@@ -102,8 +101,6 @@ public class DealershipOverviewController {
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
 				handler.getCarDAO().removeCarForSale(carTable.getSelectionModel().getSelectedItem().getLicensePlateNumber());
-				//handler.getDealership().getCarsForSale().remove(carTable.getSelectionModel().getSelectedItem());
-				//carTable.getItems().remove(selectedIndex);
 				handler.setCarData(handler.carDAO.getCarsForSale());
 				carTable.setItems(handler.getCarData());
 			} else {
@@ -123,15 +120,9 @@ public class DealershipOverviewController {
 	@FXML
 	private void handleSaleCar() {
 		Car car = carTable.getSelectionModel().getSelectedItem();
-		int selectedIndex = carTable.getSelectionModel().getSelectedIndex();
 		if (car != null) {
 			handler.showSaleCarDialog(car);
 			carTable.setItems(handler.getCarData());
-			/*try {
-				handler.setDealership(handler.dealershipDAO.getDealership());
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}*/
 			setIncomeFieldText(handler.getDealership().getIncome());
 			setProfitFieldText(handler.getDealership().getProfit());
 			setSoldCarsFieldText(handler.getDealership().getSoldCars());
@@ -176,8 +167,6 @@ public class DealershipOverviewController {
 
 	public void setHandler(CarDealershipHandler handler) {
 		this.handler = handler;
-
-		// Add observable list data to the table
 		carTable.setItems(handler.getCarData());
 	}
 

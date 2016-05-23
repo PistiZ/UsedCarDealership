@@ -17,8 +17,6 @@ public interface CarDAO {
 
 	void addSoldCar(Car car);
 
-	//boolean findIfSoldCarPresents(String licensePlateNumber);
-
 	Car getSoldCarByLPN(String licensePlateNumber);
 
 	ObservableList<Car> getCarsForSale();

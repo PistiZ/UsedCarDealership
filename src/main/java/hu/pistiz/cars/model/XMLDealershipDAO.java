@@ -9,7 +9,6 @@ import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 /**
  * <a href="Dealership.html">Dealership</a> objektumok XML-ben történő kezelését végző osztály.

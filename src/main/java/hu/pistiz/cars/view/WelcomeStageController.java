@@ -8,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -35,8 +34,6 @@ public class WelcomeStageController {
 	@FXML
 	private DatePicker birthdayPicker;
 
-	private Pane rootPane;
-
 	private CarDealershipHandler handler;
 
 	public WelcomeStageController() {
@@ -48,8 +45,6 @@ public class WelcomeStageController {
 		AnchorPane.setBottomAnchor(pane, 0.0);
 		AnchorPane.setLeftAnchor(pane, 0.0);
 		AnchorPane.setRightAnchor(pane, 0.0);
-		/*pane.prefHeightProperty().bind(rootPane.heightProperty());
-		pane.prefWidthProperty().bind(rootPane.widthProperty());*/
 	}
 
 	@FXML
@@ -61,7 +56,6 @@ public class WelcomeStageController {
 			dealership.setAddress(dealershipAddressField.getText());
 			handler.getDealershipService().incrementStartingMoney(dealership, Long.parseLong(startingMoneyField.getText()));
 			handler.getDealershipService().incrementRemainder(dealership, Long.parseLong(startingMoneyField.getText()));
-			//dealership.setStartingMoney(Long.parseLong(startingMoneyField.getText()));
 
 			dealership.getOwner().setLastName(ownerLastNameField.getText());
 			dealership.getOwner().setFirstName(ownerFirstNameField.getText());
@@ -120,7 +114,6 @@ public class WelcomeStageController {
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			// Show the error message.
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(handler.getPrimaryStage());
 			alert.setTitle("Hibás mezők");
@@ -135,7 +128,6 @@ public class WelcomeStageController {
 
 	public void setHandler(CarDealershipHandler handler) {
 		this.handler = handler;
-		this.rootPane = handler.getRootPane();
 	}
 
 }

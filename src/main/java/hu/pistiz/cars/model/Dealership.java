@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Használtautó-kereskedést reprezentáló osztály.
@@ -34,9 +32,6 @@ public class Dealership {
 	private long soldCars;
 	@XmlElement
 	private long remainder;
-
-	//private List<Car> carsForSale;
-	//private List<Car> soldCars;
 
 	/**
 	 * Paraméter nélküli konstruktor, mely a nevet <code>null</code>-ra állítja.

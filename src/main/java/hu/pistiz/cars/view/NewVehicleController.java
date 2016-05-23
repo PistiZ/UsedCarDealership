@@ -42,13 +42,10 @@ public class NewVehicleController {
 	@FXML
 	private TextArea descriptionArea;
 
-	public static Logger logger = LoggerFactory.getLogger(NewVehicleController.class);
-
 	private Stage dialogStage;
 
 	private CarDealershipHandler handler;
 	private Car car;
-	private boolean saveClicked = false;
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
@@ -57,10 +54,6 @@ public class NewVehicleController {
 
 	public void setHandler(CarDealershipHandler handler) {
 		this.handler = handler;
-	}
-
-	public boolean isSaveClicked() {
-		return saveClicked;
 	}
 
 	@FXML
@@ -139,7 +132,6 @@ public class NewVehicleController {
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			// Show the error message.
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(dialogStage);
 			alert.setTitle("Hibás mezők");
@@ -181,8 +173,6 @@ public class NewVehicleController {
 
 				alert.showAndWait();
 			}
-
-			saveClicked = true;
 		}
 	}
 
